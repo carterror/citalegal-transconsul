@@ -4,4 +4,5 @@ django-jazzmin==2.6.0
 pillow==10.2.0
 sqlparse==0.4.4
 tzdata==2024.1
+psycopg2-binary==2.9.9
 psycopg2==2.9.9
