@@ -35,7 +35,7 @@ jazzmin_settings = {
     "search_model": ["auth.User"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
-    "user_avatar": None,
+    "user_avatar": "avatar",
 
     ############
     # Top Menu #
