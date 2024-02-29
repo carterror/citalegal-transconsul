@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Página principal{% endblock title %}
+{% block main %}
+  {% for post in  post_list%}
+      <a href="{% url 'post' post.slug %}">{{post.titulo}}</a>
+  {% endfor %}
+
+{% endblock main %} 

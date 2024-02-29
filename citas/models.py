@@ -1,7 +1,7 @@
 from django.db import models
 
 from usuarios.models import Usuario
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Cita(models.Model):

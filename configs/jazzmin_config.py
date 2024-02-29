@@ -10,19 +10,19 @@ jazzmin_settings = {
     "site_brand": "Cita-Legal",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "/vendor/adminlte/img/AdminLTELogo.png",
+    "site_logo": "/assets/img/icon_oficial.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": None,
+    "login_logo": "/assets/img/logo_oficial.png",
 
     # Logo to use for login form in dark themes (defaults to login_logo)
-    "login_logo_dark": None,
+    "login_logo_dark": "/assets/img/logo_oficial.png",
 
     # CSS classes that are applied to the logo above
-    "site_logo_classes": "img-circle",
+    "site_logo_classes": "img-circle bg-white",
 
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
-    "site_icon": None,
+    "site_icon": "/assets/img/icon_oficial.png",
 
     # Welcome text on the login screen
     "welcome_sign": "Bienvenido a Cita-Legal",
@@ -146,25 +146,25 @@ jazzmin_ui_tweaks_settings = {
     "body_small_text": False,
     "brand_small_text": False,
     "brand_colour": "navbar-success",
-    "accent": "accent-teal",
+    "accent": "accent-success",
     "navbar": "navbar-success navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": True,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-success",
+    "sidebar": "sidebar-light-success",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": False,
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": True,
-    "theme": "solar",
-    "dark_mode_theme": "superhero",
+    "theme": "spacelab",
+    "dark_mode_theme": None,
     "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-secondary",
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
         "info": "btn-outline-info",
         "warning": "btn-warning",
         "danger": "btn-danger",

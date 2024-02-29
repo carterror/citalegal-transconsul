@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from citas import views
 
 urlpatterns = [
-
+    path('citas/custom/', views.CustomView.as_view(), name='custom'),
 ]
