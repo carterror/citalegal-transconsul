@@ -84,11 +84,11 @@ jazzmin_settings = {
     "hide_models": [],
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+    "order_with_respect_to": ["auth", "usuarios", "citas", "blog"],
 
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
-        "books": [{
+        "blog": [{
             "name": "Make Messages", 
             "url": "make_messages", 
             "icon": "fas fa-comments",
@@ -100,6 +100,7 @@ jazzmin_settings = {
     # for the full list of 5.13.0 free icon classes
     "icons": {
         "auth": "fas fa-users-cog",
+        "usuarios.Usuario": "fas fa-user",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
     },

@@ -2,6 +2,7 @@ from django.contrib import admin
 from usuarios.models import Usuario
 
 # Register your models here.
+@admin.register(Usuario)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         'username',
@@ -16,7 +17,7 @@ class UserAdmin(admin.ModelAdmin):
             'fields': ('username', 'email',)
         }),
         ('Informacion Personal', {
-            'fields': ('first_name', 'last_name',)
+            'fields': ('first_name', 'last_name', 'ci', 'direccion')
         }),
         ('Permisos', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups')
@@ -25,6 +26,3 @@ class UserAdmin(admin.ModelAdmin):
             'fields': ('last_login', 'date_joined')
         }),
     )
-    
-
-admin.site.register(Usuario,UserAdmin)

@@ -137,6 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 JAZZMIN_SETTINGS = jazzmin_settings
 
 JAZZMIN_UI_TWEAKS = jazzmin_ui_tweaks_settings
