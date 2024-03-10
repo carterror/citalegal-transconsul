@@ -4,6 +4,15 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+
+@admin.action(description="Aceptar Cita")
+def aceptarCita(modeladmin, request, queryset):
+    if queryset.get().fecha != None:
+        messages.error(request, "Solo se puede aceptar una cita a la vez")
+        return
+    
+    return redirect(reverse('aceptar_cita', args=[queryset.get().id]))
+
 # Register your models here.
 
 admin.site.register(Tramite)
@@ -22,7 +31,7 @@ class CitaAdmin(admin.ModelAdmin):
     
     date_hierarchy = 'created_at'
     list_filter = ('cliente', 'legalizadora')
-
+    actions = [aceptarCita]
     search_fields = ('cliente__first_name','cliente__last_name')
     # campos que se pueden editar
     # fieldsets = (
@@ -33,12 +42,3 @@ class CitaAdmin(admin.ModelAdmin):
     @admin.display(ordering='last_name', description='Clienterrrrrrrr')
     def cliente(self, obj):
         return obj.cliente.name
-    
-    def aceptarCita(modeladmin, request, queryset):
-        if queryset.get().fecha != None:
-            messages.error(request, "Solo se puede aceptar una cita a la vez")
-            return
-        
-        return redirect(reverse('aceptar_cita', args=[queryset.get().id]))
-        
-    admin.site.add_action(aceptarCita, "Aceptar Cita")
