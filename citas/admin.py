@@ -1,6 +1,8 @@
 from django.contrib import admin
 from citas.models import Cita, Tramite
 from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 # Register your models here.
 
@@ -37,7 +39,6 @@ class CitaAdmin(admin.ModelAdmin):
             messages.error(request, "Solo se puede aceptar una cita a la vez")
             return
         
-        queryset.update(fecha='2028-10-22')
-        messages.success(request, "Se aceptó la cita")
+        return redirect(reverse('aceptar_cita', args=[queryset.get().id]))
         
     admin.site.add_action(aceptarCita, "Aceptar Cita")

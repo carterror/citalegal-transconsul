@@ -19,5 +19,5 @@ from django.urls import path
 from citas import views
 
 urlpatterns = [
-    path('citas/custom/', views.CustomView.as_view(), name='custom'),
+    path('aceptar/<int:pk>', views.CustomView.as_view(), name='aceptar_cita'),
 ]

@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% block title %}Aceptar Cita{% endblock title %}
+{% block content_title %}Aceptar Cita del {{cita.created_at}}{% endblock %}
+{% block content %}
+
+    <div class="col-12 col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    Some title
+                </div>
+            </div>
+            <div class="card-body">
+                Some content {{cita.lugar}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-4">
+        <div class="card card-secondary card-outline">
+            <div class="card-header">
+                <div class="card-title">
+                    Some title
+                </div>
+            </div>
+            <div class="card-body">
+                Some content
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

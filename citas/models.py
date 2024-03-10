@@ -14,10 +14,15 @@ class Cita(models.Model):
     created_at = models.DateTimeField('Creado', auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    def __str__(self) -> str:
+        return str(self.created_at)
+    
     
 class Tramite(models.Model):
     nombre = models.CharField(max_length=250)
     precio = models.DecimalField(decimal_places=2, max_digits=5)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+      
+    def __str__(self) -> str:
+        return self.nombre  
