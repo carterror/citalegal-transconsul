@@ -53,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'configs.urls'
@@ -120,10 +119,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOCALE_PATH = [
-    BASE_DIR / "locale",
-]
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -147,3 +142,10 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 JAZZMIN_SETTINGS = jazzmin_settings
 
 JAZZMIN_UI_TWEAKS = jazzmin_ui_tweaks_settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailersend.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'MS_TDpakj@trial-neqvygm12qwg0p7w.mlsender.net'
+EMAIL_HOST_PASSWORD = 'HyZIMEAkUtKslMOJ'

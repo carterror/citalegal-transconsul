@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from usuarios.views import send_user_mail, home, signin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admincitas/', include('citas.urls')),
-    path('blog/', include('blog.urls'))
+    path('blog/', include('blog.urls')),
+    path('test/', send_user_mail),
+    path('home/', home, name='home'),
+    path("login/", signin, name='login'),
+    
     
 ]
 

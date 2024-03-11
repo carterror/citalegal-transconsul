@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Legalcare - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static '/images/icon_oficial.png' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static '/assets/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static '/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static '/assets/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static '/assets/css/ionicons.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static '/assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+
+  </head>
+  <body>
+    
+	  <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html"><img src="{% static '/images/logo_oficial.png' %}" width="150px" alt="" srcset=""></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Inicio</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">Nosotros</a></li>
+	          <li class="nav-item"><a href="practice-areas.html" class="nav-link">Practice Areas</a></li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contacto</a></li>
+			  {% if request.user.is_authenticated %}
+
+	          <li class="nav-item cta"><a href="#" class="nav-link">Cita</a></li>
+
+			  {% else %}
+	          <li class="nav-item cta"><a href="#" class="nav-link">Entrar</a></li>
+	          <li class="nav-item cta"><a href="#" class="nav-link">Registrarse</a></li>
+			  {% endif %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/banner.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-md-6 ftco-animate">
+          	<h2 class="subheading">Bienvenidos a TraNsCOnSuL S.A.</h2>
+          	<h1>Abogados luchan por su
+						  <span
+						     class="txt-rotate"
+						     data-period="2000"
+						     data-rotate='[ "Libertad.", "Derechos.", "Casos.", "Custodia." ]'></span>
+						</h1>
+            <!-- <h1 class="mb-4">Attorneys Fighting For Your Freedom</h1> -->
+            <p class="mb-4">Servicios profesionales de asistencia y asesoría legal</p>
+            <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Obtenga asesoramiento legal <span class="ion-ios-arrow-forward"></span></a></p>
+        </div>
+        <div class="col-12 col-md-6 ftco-animate">
+            <div class="card" style="width: 19rem; float: right; background-color: #004b3938;">
+                <div class="card-body">
+                  <h5 class="card-title text-white">Acceder al sistema</h5>
+                  <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="username">Usuario</label>
+                      <input type="text" class="form-control" name="username" id="username" placeholder="juanito" aria-describedby="emailHelp" style="background-color: #004b39 !important; color: white !important; border: 0px;">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Contraseña</label>
+                      <input type="password" class="form-control" name="password" id="password" style="background-color: #004b39 !important; color: white !important; border: 0px;">
+                    </div>
+                    <div class="d-flex">
+                        <a href="#" class="card-link text-white"> Si no tiene cuenta, Registrarse</a>
+                        <button type="submit" class="btn btn-primary card-link float-right">Entrar</button>
+                    </div>
+                    {% if message %}
+                        <p class="text-danger">Nombre de usuario o contraseña incorrecto.</p>
+                    {% endif %}
+                  </form>
+                </div>
+              </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+	{% include './scripts.html' %}
+    
+
+  </body>
+</html>
