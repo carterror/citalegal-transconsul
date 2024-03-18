@@ -29,25 +29,25 @@ jobs:
       run: |
         python manage.py test
 
-  # deploy-dev:
+  deploy-dev:
 
-  #   needs: [ build ]
-  #   if: github.ref == 'refs/heads/main'
+    needs: [ build ]
+    if: github.ref == 'refs/heads/main'
 
-  #   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Copy project to the hosting
-  #       uses: easingthemes/ssh-deploy@v2.1.5
-  #       env:
-  #         SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-  #         ARGS: "-rltgoDzvO --delete"
-  #         SOURCE: ""
-  #         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  #         REMOTE_USER: ${{ secrets.REMOTE_USER }}
-  #         TARGET: ${{ secrets.REMOTE_TARGET }}
+      - name: Copy project to the hosting
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: ""
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
 
       # - name: executing remote ssh commands using password
       #   uses: appleboy/ssh-action@v1.0.0
