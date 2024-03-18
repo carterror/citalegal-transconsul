@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
+    'allauth',
+    'allauth.account',
     'citas',
     'blog',
 ]
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'configs.urls'
@@ -143,9 +146,16 @@ JAZZMIN_SETTINGS = jazzmin_settings
 
 JAZZMIN_UI_TWEAKS = jazzmin_ui_tweaks_settings
 
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mailersend.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'MS_TDpakj@trial-neqvygm12qwg0p7w.mlsender.net'
 EMAIL_HOST_PASSWORD = 'HyZIMEAkUtKslMOJ'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

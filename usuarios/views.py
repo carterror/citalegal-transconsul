@@ -23,7 +23,19 @@ def send_user_mail(request):
     return HttpResponse(msg.send())
 
 def home(request):
-    return render(request, 'web/base.html')
+    return render(request, 'web/pages/home.html')
+ 
+def service(request):
+    return render(request, 'web/pages/service.html')
+
+def about(request):
+    return render(request, 'web/pages/about.html')
+
+def testimonio(request):
+    return render(request, 'web/pages/testimonio.html')
+
+def blog(request):
+    return render(request, 'web/pages/blog.html')
 
 def signin(request):
     if request.method == 'POST':

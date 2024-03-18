@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DeleteView, DetailView, CreateView
 from blog.models import Post
 from blog.forms import PostForm
 
@@ -16,7 +14,6 @@ class PostList(ListView):
         return Post.objects.filter(presentar=True).order_by("-publicado")
 
 
-
 class PostDetail(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
@@ -27,6 +24,11 @@ class PostDetail(DetailView):
         return context
 
 class PostCreate(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/post_create.html'
+    
+class PostDelete(DeleteView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_create.html'

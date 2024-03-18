@@ -1,0 +1,102 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block head_title %}{% endblock head_title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static '/images/icon_oficial.png' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static '/assets/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static '/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static '/assets/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static '/assets/css/ionicons.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static '/assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+    {% block extra_head %}
+    {% endblock extra_head %}
+  </head>
+  <body>
+    
+	  <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html"><img src="{% static '/images/logo_oficial.png' %}" width="150px" alt="" srcset=""></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Inicio</a></li>
+            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">Nosotros</a></li>
+            <li class="nav-item"><a href="{% url 'service' %}" class="nav-link">Servicios</a></li>
+            <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="{% url 'testimonio' %}" class="nav-link">Contacto</a></li>
+			  {% if request.user.is_authenticated %}
+
+	          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="#" class="nav-link bg-transparent py-1" style="border: 4px solid #00897B; border-radius: 0px !important;">Cita</a></li>
+
+			  {% else %}
+	          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="#" class="nav-link bg-transparent py-1" style="border: 4px solid #00897B; border-radius: 0px !important;">Entrar</a></li>
+	          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="#" class="nav-link bg-transparent py-1" style="border: 4px solid #00897B; border-radius: none; border-radius: 0px !important;">Registrarse</a></li>
+			  {% endif %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static '/images/banner.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-md-6 ftco-animate">
+          	<h2 class="subheading">Bienvenidos a TraNsCOnSuL S.A.</h2>
+          	<h1>Abogados luchan por su
+						  <span
+						     class="txt-rotate"
+						     data-period="2000"
+						     data-rotate='[ "Libertad.", "Derechos.", "Casos.", "Custodia." ]'></span>
+						</h1>
+            <!-- <h1 class="mb-4">Attorneys Fighting For Your Freedom</h1> -->
+            <p class="mb-4">Servicios profesionales de asistencia y asesoría legal</p>
+            <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Obtenga asesoramiento legal <span class="ion-ios-arrow-forward"></span></a></p>
+        </div>
+        <div class="col-12 col-md-6 ftco-animate ">
+        <div class="card shadow" style="float: right; background-color: #004b3938;">
+        {% block body %}
+            {% if messages %}
+                <div>
+                    <strong>{% trans "Messages:" %}</strong>
+                    <ul>
+                        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            {% block content %}
+            {% endblock content %}
+
+        {% endblock body %}
+        {% block extra_body %}
+        {% endblock extra_body %}
+        </div>
+        </div>
+      </div>
+    </div>
+
+	{% include '../web/scripts.html' %}
+    
+
+  </body>
+</html>
