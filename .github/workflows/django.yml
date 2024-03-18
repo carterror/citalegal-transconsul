@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.9]
 
     steps:
     - uses: actions/checkout@v3
@@ -28,3 +28,31 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+
+  # deploy-dev:
+
+  #   needs: [ build ]
+  #   if: github.ref == 'refs/heads/main'
+
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+  #     - name: Copy project to the hosting
+  #       uses: easingthemes/ssh-deploy@v2.1.5
+  #       env:
+  #         SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+  #         ARGS: "-rltgoDzvO --delete"
+  #         SOURCE: ""
+  #         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+  #         REMOTE_USER: ${{ secrets.REMOTE_USER }}
+  #         TARGET: ${{ secrets.REMOTE_TARGET }}
+
+      # - name: executing remote ssh commands using password
+      #   uses: appleboy/ssh-action@v1.0.0
+      #   with:
+      #     script: cd ${{ secrets.REMOTE_TARGET }} && docker-compose up -d --build
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     key: ${{ secrets.SERVER_SSH_KEY }}
