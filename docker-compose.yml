@@ -20,3 +20,7 @@ services:
       - web_network
     depends_on:
       - transconsul-app
+
+networks:
+  web_network:
+    driver: bridge
