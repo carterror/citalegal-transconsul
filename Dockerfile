@@ -12,10 +12,14 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # coping project files
-COPY apps ./apps
-COPY core ./core
-COPY staticfiles ./staticfiles
-COPY uploads ./uploads
+COPY blog ./blog
+COPY citas ./citas
+COPY usuarios ./usuarios
+COPY templates ./templates
+COPY configs ./configs
+COPY media ./media
+COPY static ./static
+
 COPY .env gunicorn-cfg.py manage.py start.sh ./
 
 # gunicorn
