@@ -5,11 +5,10 @@ services:
   transconsul-app:
     container_name: transconsul_app
     restart: always
-    env_file: .env
     build: .
 
-  nginx:
-    container_name: nginx_transconcul
+  transconcul-nginx:
+    container_name: transconcul_nginx
     restart: always
     image: "nginx:latest"
     ports:

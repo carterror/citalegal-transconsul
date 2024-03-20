@@ -20,7 +20,7 @@ COPY configs ./configs
 COPY media ./media
 COPY static ./static
 
-COPY .env gunicorn-cfg.py manage.py start.sh ./
+COPY gunicorn-cfg.py manage.py start.sh ./
 
 # gunicorn
 CMD ["bash", "./start.sh"]
