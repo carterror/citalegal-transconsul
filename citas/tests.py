@@ -7,7 +7,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from usuarios.models import Usuario
 from django.test import TestCase, Client
 from django.urls import reverse
-import os
+from selenium.webdriver.chrome.options import Options
 
 # Create your tests here.
 class AdminTest(TestCase):
@@ -35,7 +35,9 @@ class AdminAcceptanceTest(StaticLiveServerTestCase, TestCase):
         cls.admin_user = Usuario.objects.create_superuser(
             'admin', 'admin@test.com', 'admin'
         )
-        cls.selenium = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        chrome_options = Options()
+        chrome_options.add_argument("--headless") 
+        cls.selenium = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
         cls.selenium.implicitly_wait(10)
 
     @classmethod
