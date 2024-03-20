@@ -9,7 +9,7 @@ services:
     build: .
 
   nginx:
-    container_name: nginx
+    container_name: nginx_transconcul
     restart: always
     image: "nginx:latest"
     ports:
