@@ -4,4 +4,4 @@
 python3 manage.py migrate
 
 # Executing the project
-gunicorn configs.wsgi:application
+gunicorn --config gunicorn-cfg.py core.wsgi
