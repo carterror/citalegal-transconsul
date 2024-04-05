@@ -4,4 +4,4 @@
 python3 manage.py migrate
 
 # Executing the project
-gunicorn --config gunicorn-cfg.py configs.wsgi
+python3 manage.py", "runserver", "0.0.0.0:80
