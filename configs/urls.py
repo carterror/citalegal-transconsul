@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from usuarios.views import send_user_mail, home, service, about, testimonio, blog
+from usuarios.views import onrender, send_user_mail, home, service, about, testimonio, blog
 
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('about', about, name='about'),
     path('testimonio', testimonio, name='testimonio'),
     path('blog', blog, name='blog'),
-    
+    path('render', onrender)
 ]
 
 if settings.DEBUG:
