@@ -37,7 +37,7 @@ class AdminAcceptanceTest(StaticLiveServerTestCase, TestCase):
         )
         chrome_options = Options()
         chrome_options.add_argument("--headless") 
-        cls.selenium = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+        cls.selenium = webdriver.Chrome(service=ChromeService(executable_path="D:\Proyects\citalegal-transconsul\chromedriver.exe"))
         cls.selenium.implicitly_wait(10)
 
     @classmethod

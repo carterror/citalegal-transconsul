@@ -19,8 +19,10 @@ class Cita(models.Model):
     
     
 class Tramite(models.Model):
+    codigo = models.CharField(max_length=10, null=False, unique=True)
     nombre = models.CharField(max_length=250)
-    precio = models.DecimalField(decimal_places=2, max_digits=5)
+    precio = models.DecimalField(decimal_places=2, max_digits=9)
+    descripcion = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
       
