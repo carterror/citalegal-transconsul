@@ -16,10 +16,10 @@
           <li class="nav-item"><a href="{% url 'testimonio' %}" class="nav-link">Contacto</a></li>
           {% if request.user.is_authenticated %}
 
-          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="#" class="nav-link bg-transparent py-1" style="border: 4px solid #00897B; border-radius: 0px !important;">Cita</a></li>
+          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="#" class="nav-link py-1" style="border: 2px solid #ffffff; background-color: #00897B; border-radius: 0px !important;">Cita</a></li>
           
           <li class="nav-item cta dropdown" style="border-radius: 0px !important;">
-            <a href="#" class="nav-link dropdown-toggle bg-transparent py-1" style="border: 4px solid #00897B; border-radius: 0px !important;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="nav-link dropdown-toggle py-1" style="border: 2px solid #ffffff; background-color: #00897B; border-radius: 0px !important;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="media/{{request.user.avatar}}" alt="avatar" class="rounded" srcset="" height="25px"> {{ request.user }}
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

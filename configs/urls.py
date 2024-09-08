@@ -18,20 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from usuarios.views import send_user_mail, home, service, about, testimonio, blog
+from usuarios.views import send_user_mail
 
 urlpatterns = [
+    path('', include('web.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls ),
     path('admincitas/', include('citas.urls')),
+
     path('blog/', include('blog.urls')),
     path('test/', send_user_mail),
     # path("login/", signin, name='login'),
-    path('', home, name='home'),
-    path('service', service, name='service'),
-    path('about', about, name='about'),
-    path('testimonio', testimonio, name='testimonio'),
-    path('blog', blog, name='blog'),
     
 ]
 

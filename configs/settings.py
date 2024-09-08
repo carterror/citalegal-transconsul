@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'citas',
     'blog',
+    'web'
 ]
 
 MIDDLEWARE = [
