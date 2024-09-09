@@ -7,5 +7,3 @@ build:
 run:
   runtime-version: 3.11
   command: sh startup.sh
-  network:
-    port: 8000
