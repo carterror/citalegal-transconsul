@@ -23,7 +23,6 @@ from usuarios.views import send_user_mail
 urlpatterns = [
     path('', include('web.urls')),
     path('accounts/', include('allauth.urls')),
-    path('admin/', admin.site.urls ),
     path('admincitas/', include('citas.urls')),
 
     path('blog/', include('blog.urls')),

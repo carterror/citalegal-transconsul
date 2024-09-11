@@ -20,3 +20,6 @@ def testimonio(request):
 
 def blog(request):
     return render(request, 'web/pages/blog.html')
+
+def dashboard(request):
+    return render(request, 'admin/base.html')

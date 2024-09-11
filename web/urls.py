@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from citas import views
-from .views import home, service, about, testimonio, blog
+from .views import home, service, about, testimonio, blog, dashboard
 
 urlpatterns = [
     path('aceptar/<int:pk>', views.CustomView.as_view(), name='aceptar_cita'),
     path('', home, name='home'),
+    path('admin', dashboard, name='home'),
     path('service', service, name='service'),
     path('about', about, name='about'),
     path('testimonio', testimonio, name='testimonio'),
