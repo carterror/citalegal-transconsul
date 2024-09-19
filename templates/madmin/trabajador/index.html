@@ -1,0 +1,146 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Trabajadores
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+<div class="container-fluid p-0">
+
+  <h1 class="h3 mb-3">Trabajadores</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="row card-header justify-between">
+          <div class="col-6">
+
+            <h5 class="card-title mb-0">Listado de trabajadores</h5>
+          </div>
+          <div class="col-6 text-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear Nuevo</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="mdatatable" class="display">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Nivel</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for trabajador in trabajadores %}
+                <tr>
+                    <td>{{trabajador.nombre}}</td>
+                    <td>{{trabajador.nivel}}</td>
+                    <td>{{trabajador.descripcion}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-bs-placement="top" title="Ver">
+                            <i class="bi bi-eye"></i>
+                            <span class="visually-hidden">View</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editModal" data-object="{{ trabajador }}" data-address="{% url 'updateTrabajador' trabajador.id %}" data-toggle="tooltip" data-bs-placement="top" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class="visually-hidden">Edit</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-address="{% url 'deleteTrabajador' trabajador.id %}" onclick="deleteAlert(this)" data-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                            <span class="visually-hidden">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data" action="" >
+            {% csrf_token %}
+          <div class="mb-3">
+            <label for="nombre" class="col-form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" autofocus required>
+          </div>
+          <div class="mb-3">
+            <label for="nivel" class="col-form-label">Nivel</label>
+            <input type="text" class="form-control" name="nivel" id="nivel" required>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="col-form-label">Descripcion</label>
+            <textarea class="form-control" name="descripcion" id="descripcion"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            <input class="form-control" type="file" id="foto" name="foto" id="foto">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+  var editModal = document.getElementById('editModal')
+  editModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    var obj = JSON.parse(button.getAttribute('data-object'));
+    var address = button.getAttribute('data-address')
+
+    var modalTitle = editModal.querySelector('.modal-title')
+    var nombre = editModal.querySelector('.modal-body #nombre')
+    var nivel = editModal.querySelector('.modal-body #nivel')
+    var descripcion = editModal.querySelector('.modal-body #descripcion')
+    var form = editModal.querySelector('.modal-body form')
+
+    if (obj) {
+        form.setAttribute('action', address)
+        modalTitle.textContent = 'Editar Trabajador ' + obj.nombre
+        nombre.value = obj.nombre
+        nivel.value = obj.nivel
+        descripcion.value = obj.descripcion
+    } else {
+        form.setAttribute('action', "{% url 'storeTrabajador' %}")
+        modalTitle.textContent = 'Nuevo Trabajador'
+        nombre.value = ''
+        nivel.value = ''
+        descripcion.value = ''
+    }
+  })
+</script>
+{% endblock extra_scripts %}

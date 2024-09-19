@@ -1,0 +1,11 @@
+.sidebar-content {
+    background-color: #004b39ca;
+}
+
+.sidebar-content .sidebar-item a {
+    background-color: #005a45ab !important;
+}
+
+.active {
+    border-left-color: red !important;
+}

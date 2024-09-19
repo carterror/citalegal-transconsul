@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from usuarios.views import send_user_mail
 
 urlpatterns = [
+    path('djangoadmin/', admin.site.urls ),
     path('', include('web.urls')),
     path('accounts/', include('allauth.urls')),
     path('admincitas/', include('citas.urls')),

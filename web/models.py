@@ -1,5 +1,6 @@
 from django.db import models
 from usuarios.models import Usuario
+import json
 
 # Create your models here.
 class Trabajador(models.Model):
@@ -8,6 +9,15 @@ class Trabajador(models.Model):
     foto = models.ImageField('Foto de Trabajador', upload_to='trabajadores/', blank=True, null=True)
     descripcion = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return json.dumps({
+            'nombre': self.nombre,
+            'nivel': self.nivel,
+            'foto': self.foto.name,
+            'descripcion': self.descripcion,
+
+        })
     
 class Testimonio(models.Model):
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)

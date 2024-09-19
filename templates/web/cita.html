@@ -1,0 +1,75 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Cita
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+	<!-- Testimonio opinion -->
+    <section class="ftco-section testimony-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          	<span class="subheading">Citas</span>
+            <h2 class="mb-4">Reservación</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="card">
+              <h5 class="card-header">Información de la cita</h5>
+              <div class="card-body">
+                <form method="post" action="{% url 'changePassword' %}">
+                  {% csrf_token %}
+                 
+                  <div class="form-group ">
+                    <label for="validationTooltip01">First name</label>
+                    <input class="form-control" type="date" id="fechita" />
+                    <div class="valid-tooltip">
+                      Looks good!
+                    </div>
+                  </div>
+                  
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck1" checked onchange="changeAbo(this)">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Sita con Abogado
+                    </label>
+                  </div>
+                  <div class="form-group" id="motivo">
+                    <label for="motivo">Motivo</label>
+                    <textarea class="form-control" id="motivo" name="motivo" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+  let cajaFecha = document.getElementById("fechita")
+  let motivo = document.getElementById("motivo")
+  cajaFecha.setAttribute('min', new Date().toISOString().split('T')[0])
+
+  function changeAbo(ev) {
+    ev.value = ev.checked
+    motivo.style.display= !ev.checked ? 'none' : 'block'
+  }
+</script>
+{% endblock extra_scripts %}

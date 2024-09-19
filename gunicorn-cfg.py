@@ -3,8 +3,8 @@
 Copyright (c) 2019 - present Transconsul
 """
 
-bind = '0.0.0.0:5005'
-workers = 1
+bind = '0.0.0.0:8000'
+workers = 2
 accesslog = '-'
 loglevel = 'debug'
 capture_output = True

@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from citas import views
-from .views import home, service, about, testimonio, blog, dashboard
+from .views import home, service, about, testimonio, blog, dashboard, trabajador, cita, storeTrabajador, updateTrabajador, deleteTrabajador, profile
+from usuarios.views import changePassword, updatePerfil, updatePhotoPerfil
 
 urlpatterns = [
     path('aceptar/<int:pk>', views.CustomView.as_view(), name='aceptar_cita'),
@@ -27,4 +28,20 @@ urlpatterns = [
     path('about', about, name='about'),
     path('testimonio', testimonio, name='testimonio'),
     path('blog', blog, name='blog'),
+
+    path('profile/', profile, name='profile'),
+    path('profile/change-password/', changePassword, name='changePassword'),
+    path('profile/update/', updatePerfil, name='updatePerfil'),
+    path('profile/update-photo/', updatePhotoPerfil, name='updatePhotoPerfil'),
+
+    path('citas/', cita, name='citas'),
+
+
+    
+    path('admin/trabajadores/', trabajador, name='trabajador'),
+    path('admin/trabajadores/store/', storeTrabajador, name='storeTrabajador'),
+    path('admin/trabajadores/<int:pk>/update/', updateTrabajador, name='updateTrabajador'),
+    path('admin/trabajadores/<int:pk>/delete/', deleteTrabajador, name='deleteTrabajador'),
+
+
 ]
