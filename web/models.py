@@ -25,3 +25,9 @@ class Testimonio(models.Model):
     servicio = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
+def __str__(self):
+    return json.dumps({
+        'user': self.user,
+        'comentario': self.comentario,
+        'servicio': self.servicio,
+    })

@@ -1,0 +1,74 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Testimonios
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+<div class="container-fluid p-0">
+
+  <h1 class="h3 mb-3">Testimonios</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="row card-header justify-between">
+          <div class="col-6">
+
+            <h5 class="card-title mb-0">Listado de testimonios</h5>
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="mdatatable" class="display">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Comentario</th>
+                <th>Servicio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for testimonio in testimonios %}
+                <tr>
+                    <td>({{testimonio.user.username}}) {{testimonio.user.first_name}} {{testimonio.user.last_name}}</td>
+                    <td>{{testimonio.comentario}}</td>
+                    <td>{{testimonio.servicio}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-bs-placement="top" title="Ver">
+                            <i class="bi bi-eye"></i>
+                            <span class="visually-hidden">View</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-address="{% url 'deleteTestimonio' testimonio.id %}" onclick="deleteAlert(this)" data-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                            <span class="visually-hidden">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}

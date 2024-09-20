@@ -17,3 +17,16 @@
 <script src="{% static '/assets/js/main.js' %}"></script>
 <script src="{% static '/assets/js/tour.js' %}"></script>
 <script src="{% static 'assets/js/sweetalert2.min.js' %}"></script>
+<script src="{% static 'adminassets/js/datatables.min.js' %}"></script>
+
+<script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+        var table = new DataTable('#mdatatable', {
+        language: {
+            url: "{% static 'adminassets/fonts/es-MX.json' %}",
+        },
+    });
+</script>

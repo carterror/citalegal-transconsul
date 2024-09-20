@@ -1,0 +1,100 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Reservas
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+	<!-- Testimonio opinion -->
+    <section class="ftco-section testimony-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          	<span class="subheading">Reservass</span>
+            <h2 class="mb-4">Reservaciones</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="card">
+              <h5 class="card-header">Información de la cita</h5>
+              <div class="card-body">
+                <table id="mdatatable" class="display">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Usuario</th>
+                      <th>Estado</th>
+                      <th class="text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for cita in citas %}
+                      <tr>
+                          <td>{{cita.fecha.fecha | date:"d / m / Y"}}</td>
+                          <td>({{cita.cliente.username}}) {{cita.cliente.first_name}} {{cita.cliente.last_name}}</td>
+                          <td class="px-2 text-center" >
+                            {% if cita.estado == 'pending' %}
+                              <span class="badge bg-warning p-2 w-50">Pendiente</span>
+                            {% elif cita.estado == 'cancel' %}
+                              <span class="badge bg-danger p-2 w-50">Cancelado</span>
+                            {% elif cita.estado == 'success' %}
+                              <span class="badge bg-success p-2 w-50">Completado</span>
+                            {% elif cita.estado == 'accept' %}
+                              <span class="badge bg-primary p-2 w-50">Aceptado</span>
+                            {% endif %}
+                          </td>
+                          <td class="text-right" >
+                              <div class="btn-group">
+                                  <a type="button" class="btn btn-outline-success" href="{% url 'aceptarCita' cita.id %}" data-toggle="tooltip" data-bs-placement="top" title="Aceptar">
+                                    <i class="icon icon-phone "></i>
+                                  <span class="visually-hidden">Aceptar</span>
+                                  </a>
+                                  <a type="button" class="btn btn-outline-danger" href="{% url 'cancelarCita' cita.id %}" data-toggle="tooltip" data-bs-placement="top" title="Cancelar">
+                                    <i class="icon icon-phone "></i>
+                                  <span class="visually-hidden">Cancelar</span>
+                                  </a>
+                              </div>
+                          </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+  let cajaFecha = document.getElementById("fechita")
+  let motivo = document.getElementById("motivo")
+  let cantidad = document.getElementById("cantidad")
+
+  cajaFecha.setAttribute('min', new Date().toISOString().split('T')[0])
+
+  function changeAbo(ev) {
+    ev.value = ev.checked
+    motivo.style.display= !ev.checked ? 'none' : 'block'
+  }
+
+  function changeOb(ev1) {
+    ev1.value = ev1.checked
+    cantidad.style.display= !ev1.checked ? 'none' : 'block'
+  }
+</script>
+{% endblock extra_scripts %}

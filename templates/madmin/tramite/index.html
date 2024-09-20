@@ -1,0 +1,155 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Trámite
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+<div class="container-fluid p-0">
+
+  <h1 class="h3 mb-3">Trámites</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="row card-header justify-between">
+          <div class="col-6">
+
+            <h5 class="card-title mb-0">Listado de Trámites</h5>
+          </div>
+          <div class="col-6 text-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear Nuevo</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="mdatatable" class="display">
+            <thead>
+              <tr>
+                <th class="text-start">Código</th>
+                <th>Nombre</th>
+                <th class="text-start">Precio</th>
+                <th>Descripción</th>
+                <th class="text-end">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tramite in tramites %}
+                <tr>
+                    <td class="text-start" >{{ tramite.codigo }}</td>
+                    <td>{{tramite.nombre}}</td>
+                    <td class="text-start">{{tramite.precio}}</td>
+
+                    <td class="px-2">
+                      {{tramite.descripcion}}
+                    </td>
+                    <td class="text-end">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-bs-placement="top" title="Ver">
+                            <i class="bi bi-eye"></i>
+                            <span class="visually-hidden">View</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editModal" data-object="{{ tramite }}" data-address="{% url 'updateTramite' tramite.id %}" data-toggle="tooltip" data-bs-placement="top" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class="visually-hidden">Edit</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-address="{% url 'deleteTramite' tramite.id %}" onclick="deleteAlert(this)" data-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                            <span class="visually-hidden">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="" >
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="codigo" class="col-form-label">Código</label>
+            <input type="text" class="form-control" name="codigo" id="codigo" step="0.01" required>
+          </div>
+          <div class="mb-3">
+            <label for="nombre" class="col-form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" step="0.01" required>
+          </div>
+          <div class="mb-3">
+            <label for="precio" class="col-form-label">Precio</label>
+            <input type="number" class="form-control" name="precio" id="precio" step="0.01" required>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="col-form-label">Descripcion</label>
+            <textarea class="form-control" name="descripcion" id="descripcion"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+  var editModal = document.getElementById('editModal')
+  editModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    console.log(button.getAttribute('data-object'));
+    var obj = JSON.parse(button.getAttribute('data-object'));
+    var address = button.getAttribute('data-address')
+    var form = editModal.querySelector('.modal-body form')
+
+    var modalTitle = editModal.querySelector('.modal-title')
+    var nombre = editModal.querySelector('.modal-body #nombre')
+    var descripcion = editModal.querySelector('.modal-body #descripcion')
+    var precio = editModal.querySelector('.modal-body #precio')
+    var codigo = editModal.querySelector('.modal-body #codigo')
+
+    if (obj) {
+        form.setAttribute('action', address)
+        modalTitle.textContent = 'Editar Trámite ' + obj.fecha
+        nombre.value = obj.nombre
+        descripcion.value = obj.descripcion
+        precio.value = (obj.precio[0] / obj.precio[1] ).toFixed(2)
+        codigo.value = obj.codigo
+    } else {
+        form.setAttribute('action', "{% url 'storeTramite' %}")
+        modalTitle.textContent = 'Nuevo Trámite'
+        nombre.value = ''
+        descripcion.value = ''
+        precio.value = ''
+        codigo.value = ''
+    }
+  })
+</script>
+{% endblock extra_scripts %}

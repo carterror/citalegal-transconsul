@@ -29,10 +29,39 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {% if request.path == '/admin/trabajador' %} active {% endif %}">
+            <li class="sidebar-item {% if request.path == '/admin/trabajadores/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'trabajador' %}">
                     <i class="align-middle" data-feather="book"></i>
                     <span class="align-middle">Trabajadores</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item {% if request.path == '/admin/testimonios/' %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'testimonio' %}">
+                    <i class="align-middle" data-feather="book"></i>
+                    <span class="align-middle">Testimonio</span>
+                </a>
+            </li>
+
+
+            <li class="sidebar-item {% if request.path == '/admin/disponible/' %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'disponible' %}">
+                    <i class="align-middle" data-feather="book"></i>
+                    <span class="align-middle">Disponibilidad</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item {% if request.path == '/admin/citas/' %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'citas' %}">
+                    <i class="align-middle" data-feather="book"></i>
+                    <span class="align-middle">Citas</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item {% if request.path == '/admin/tramite/' %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'tramite' %}">
+                    <i class="align-middle" data-feather="book"></i>
+                    <span class="align-middle">Tramite</span>
                 </a>
             </li>
         </ul>

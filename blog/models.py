@@ -1,6 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-
+import json
 from usuarios.models import Usuario
 
 # Create your models here.
@@ -13,7 +13,11 @@ class Post(models.Model):
     publicado = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.titulo
+        return json.dumps({
+            'titulo': self.titulo,
+            'cuerpo': self.cuerpo,
+            'presentar': self.presentar,
+        })
    
     def save(self, *args, **kwargs):
         if not self.id:
