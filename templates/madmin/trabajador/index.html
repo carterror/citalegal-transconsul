@@ -23,18 +23,21 @@ Trabajadores
     <div class="col-12">
       <div class="card">
         <div class="row card-header justify-between">
-          <div class="col-6">
-
+          <div class="col-6 align-self-center">
             <h5 class="card-title mb-0">Listado de trabajadores</h5>
           </div>
           <div class="col-6 text-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear Nuevo</button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger" data-csrf='{{ csrf_token }}' data-address="{% url 'deleteAllTrabajador' %}" onclick="deleteAll(this)">Eliminar</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear nuevo</button>
+            </div>
           </div>
         </div>
         <div class="card-body">
           <table id="mdatatable" class="display">
             <thead>
               <tr>
+                <th></th>
                 <th>Nombre</th>
                 <th>Nivel</th>
                 <th>Descripcion</th>
@@ -44,6 +47,7 @@ Trabajadores
             <tbody>
               {% for trabajador in trabajadores %}
                 <tr>
+                    <td>{{trabajador.id}}</td>
                     <td>{{trabajador.nombre}}</td>
                     <td>{{trabajador.nivel}}</td>
                     <td>{{trabajador.descripcion}}</td>

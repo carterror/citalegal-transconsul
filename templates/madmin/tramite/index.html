@@ -23,18 +23,21 @@ Trámite
     <div class="col-12">
       <div class="card">
         <div class="row card-header justify-between">
-          <div class="col-6">
-
+          <div class="col-6 align-self-center">
             <h5 class="card-title mb-0">Listado de Trámites</h5>
           </div>
           <div class="col-6 text-end">
+            <div class="btn-group">
+            <button type="button" class="btn btn-danger" onclick="deleteAll(this)">Eliminar</button>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear Nuevo</button>
+          </div>
           </div>
         </div>
         <div class="card-body">
           <table id="mdatatable" class="display">
             <thead>
               <tr>
+                <th class="text-start"></th>
                 <th class="text-start">Código</th>
                 <th>Nombre</th>
                 <th class="text-start">Precio</th>
@@ -45,6 +48,7 @@ Trámite
             <tbody>
               {% for tramite in tramites %}
                 <tr>
+                    <td>{{ tramite.id }}</td>
                     <td class="text-start" >{{ tramite.codigo }}</td>
                     <td>{{tramite.nombre}}</td>
                     <td class="text-start">{{tramite.precio}}</td>
@@ -151,5 +155,9 @@ Trámite
         codigo.value = ''
     }
   })
+</script>
+<script>
+
+
 </script>
 {% endblock extra_scripts %}

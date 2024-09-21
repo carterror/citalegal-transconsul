@@ -13926,3 +13926,7 @@ textarea.form-control {
     stroke-dashoffset: -136px;
   }
 }
+
+.tab-pane p {
+  transition: all 0.5s !important;
+}

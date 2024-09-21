@@ -11,4 +11,6 @@ urlpatterns = [
     path('admincitas/blog/store/', views.storeBlog, name='storeBlog'),
     path('admincitas/blog/<int:pk>/update/', views.updateBlog, name='updateBlog'),
     path('admincitas/blog/<int:pk>/delete/', views.deleteBlog, name='deleteBlog'),
+    path('admincitas/blog/delete-all/', views.deleteAllBlog, name='deleteAllBlog'),
+
 ]

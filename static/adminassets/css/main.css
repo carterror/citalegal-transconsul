@@ -1,3 +1,8 @@
+
+:root {
+    --dt-row-selected: 2, 83, 65;
+  }
+
 .sidebar-content {
     background-color: #004b39ca;
 }
@@ -7,5 +12,5 @@
 }
 
 .active {
-    border-left-color: red !important;
+    border-left-color: rgb(2, 83, 65) !important;
 }

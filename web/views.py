@@ -7,11 +7,17 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
+from blog.models import Post
+from django.http import JsonResponse
+import json
+
 
 def home(request):
     context = {
         "testimonios" : Testimonio.objects.all(),
         "trabajadores" : Trabajador.objects.all(),
+        "tramites": Tramite.objects.all(),
+        "posts": Post.objects.all(),
     }
     return render(request, 'web/pages/home.html', context)
  
@@ -66,18 +72,12 @@ def trabajador(request):
 @staff_member_required
 def storeTrabajador(request):
     images = request.FILES.getlist('foto')
-    if images:
-        trabajador = Trabajador.objects.create(
+    
+    trabajador = Trabajador.objects.create(
         descripcion = request.POST['descripcion'],
         nombre = request.POST['nombre'],
         nivel = request.POST['nivel'],
-        foto = images[0]
-    )
-    else:
-        trabajador = Trabajador.objects.create(
-        descripcion = request.POST['descripcion'],
-        nombre = request.POST['nombre'],
-        nivel = request.POST['nivel'],
+        foto = images[0] if images else None
     )
 
     messages.success(request, 'Guardado con éxito')
@@ -87,10 +87,15 @@ def storeTrabajador(request):
 @staff_member_required
 def updateTrabajador(request, pk):
     trabajador = get_object_or_404(Trabajador, pk=pk)
+    images = request.FILES.getlist('foto')
     
     trabajador.descripcion = request.POST['descripcion']
     trabajador.nombre = request.POST['nombre']
     trabajador.nivel = request.POST['nivel']
+
+    if images:
+        trabajador.foto = images[0]
+
     trabajador.save()
 
     messages.success(request, 'Guardado con éxito')
@@ -106,6 +111,30 @@ def deleteTrabajador(request, pk):
     messages.success(request, 'Eliminado con éxito.')
     
     return redirect('trabajador')
+
+@login_required
+@staff_member_required
+def deleteAllTrabajador(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            print(data)
+            # Procesa los datos aquí
+            for id in list(data):
+                trabajador = get_object_or_404(Trabajador, pk=id)
+                trabajador.delete()
+
+            response_data = {'message': 'Datos eliminados correctamente'}
+
+            return JsonResponse(response_data, status=200)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Datos JSON inválidos'}, status=400)
+
+    else:
+
+        messages.success(request, 'Eliminado con éxito.')
+        
+        return redirect('trabajador')
 
 
 @login_required

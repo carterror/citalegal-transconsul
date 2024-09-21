@@ -125,14 +125,6 @@
         "showMessage": "Mostrar Todo"
     },
     "select": {
-        "cells": {
-            "1": "1 celda seleccionada",
-            "_": "%d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        },
         "rows": {
             "1": "1 fila seleccionada",
             "_": "%d filas seleccionadas"

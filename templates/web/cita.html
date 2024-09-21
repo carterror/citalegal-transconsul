@@ -16,7 +16,8 @@ Cita
 {% block extra_content %}
 
 	<!-- Testimonio opinion -->
-    <section class="ftco-section testimony-section">
+    <section class="ftco-section testimony-section" >
+      <a name="aqui"></a>
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -38,8 +39,7 @@ Cita
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">Trámite</label>
-                    <select class="form-control" id="tramite" name="tramite">
-                      <option>Desconocido</option>
+                    <select class="form-control" id="tramite" name="tramite" required>
                       {% for tramite in tramites %}
                         <option value="{{ tramite.id }}">{{ tramite.nombre }} (${{ tramite.precio }})</option>
                       {% endfor %}

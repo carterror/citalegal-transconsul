@@ -29,6 +29,8 @@
                 </a>
             </li>
 
+            <li class="sidebar-header">Web Cliente</li>
+
             <li class="sidebar-item {% if request.path == '/admin/trabajadores/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'trabajador' %}">
                     <i class="align-middle" data-feather="book"></i>
@@ -42,6 +44,8 @@
                     <span class="align-middle">Testimonio</span>
                 </a>
             </li>
+
+            <li class="sidebar-header">Citas</li>
 
 
             <li class="sidebar-item {% if request.path == '/admin/disponible/' %} active {% endif %}">
@@ -61,7 +65,16 @@
             <li class="sidebar-item {% if request.path == '/admin/tramite/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'tramite' %}">
                     <i class="align-middle" data-feather="book"></i>
-                    <span class="align-middle">Tramite</span>
+                    <span class="align-middle">Trámites</span>
+                </a>
+            </li>
+
+            <li class="sidebar-header">Blog</li>
+
+            <li class="sidebar-item {% if request.path == '/admin/blog/' %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'blog' %}">
+                    <i class="align-middle" data-feather="book"></i>
+                    <span class="align-middle">Artículos</span>
                 </a>
             </li>
         </ul>

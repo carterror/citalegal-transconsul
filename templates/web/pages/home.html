@@ -101,13 +101,13 @@ Inicio
 									  </li>
 									</ul>
 									<div class="tab-content bg-light rounded mt-2">
-									  <div class="tab-pane container p-0 active" id="home1">
+									  <div class="tab-pane container p-0 active"  id="home1">
 									  	<p>Con profesionalidad, calidad y experiencia, aspiramos a satisfacer las expectativas crecientes de los clientes en la prestación de servicios legales y organizacionales que emprendamos.</p>
 									  </div>
-									  <div class="tab-pane container p-0 fade" id="home2">
+									  <div class="tab-pane container p-0 " id="home2">
 									  	<p>Conocer y satisfacer las necesidades de los clientes, para hacernos imprescindibles en la prestación de los servicios que brindamos.</p>
 									  </div>
-									  <div class="tab-pane container p-0 fade" id="home3">
+									  <div class="tab-pane container p-0 " id="home3">
 									  	<p>Nos caracterizan la transparencia, responsabilidad, aceptación, nitidez, satisfacción, competitividad, organización, notoriedad, seriedad, unidad y lealtad.</p>
 									  </div>
 									</div>
@@ -137,38 +137,16 @@ Inicio
         <div class="row">
 			<div class="col-md-12">
 				<div class="carousel-case owl-carousel ftco-owl">
+					{% for t in tramites %}
 					<div class="item">
 						<div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-1.jpg' %});">
 		        			<div class="text text-center">
-								<h3><a href="#">LEGALIZACIONES</a></h3>
-		        				<span>Obtención y legalización de documentos registrales y notariales</span>
+								<h3><a href="#">{{t.precio}}</a></h3>
+		        				<span>{{t.nombre}}</span>
 		        			</div>
 		        		</div>
 					</div>
-					<div class="item">
-							  <div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-3.jpg' %});">
-								  <div class="text text-center">
-									  <h3><a href="#">ASISTENCIA LEGAL</a></h3>
-									  <span>EN CONCERTACIÓN DE NEGOCIOS E INVERSIÓN EXTRANJERA</span>
-								  </div>
-							  </div>
-					</div>
-					<div class="item">
-		        		<div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-2.jpg' %});">
-		        			<div class="text text-center">
-		        				<h3><a href="#">SERVICIOS NOTARIALES</a></h3>
-		        				<span>Abarcan toda la gama de escrituras públicas interesadas por personas jurídicas y naturales extranjeras.</span>
-		        			</div>
-		        		</div>
-              </div>
-              <div class="item">
-		        		<div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-4.jpg' %});">
-		        			<div class="text text-center">
-		        				<h3><a href="#">Legal Ultimo</a></h3>
-		        				<span>ultimo</span>
-		        			</div>
-		        		</div>
-              </div>
+					{% endfor %}
             </div>
         	</div>
         	<div class="col-md-12 text-center mt-4">
@@ -287,72 +265,31 @@ Inicio
           </div>
         </div>
         <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-          		<div class="text px-4 py-4">
-          			<h3 class="heading mb-0"><a href="#">PACTOS MATRIMONIALES, TEMA DE ACTUALIDAD EN NUESTRA SOCIEDAD</a></h3>
-          		</div>
-              <a href="blog-single.html" class="block-20" style="background-image: url({% static '/images/image_1.jpg' %});">
-              </a>
-              <div class="text p-4 float-right d-block">
-              	<div class="topper d-flex align-items-center">
-              		<div class="one py-2 pl-3 pr-1 align-self-stretch">
-              			<span class="day">18</span>
-              		</div>
-              		<div class="two pl-0 pr-3 py-2 align-self-stretch">
-              			<span class="yr">2019</span>
-              			<span class="mos">October</span>
-              		</div>
-              	</div>
-                <p>Por: Magdy Beatriz Domínguez Herrera y Jessica Sevilla Hernández, Consultores y Abogados</p>
-                <p><a href="#" class="btn btn-primary">Leer más</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-          		<div class="text px-4 py-4">
-          			<h3 class="heading mb-0"><a href="#">CONOCIENDO LA LÍNEA ROJA: LA RESPONSABILIDAD PENAL EN EL EMPRESARIADO CUBANO</a></h3>
-          		</div>
-              <a href="blog-single.html" class="block-20" style="background-image: url({% static '/images/image_2.jpg' %});">
-              </a>
-              <div class="text p-4 float-right d-block">
-              	<div class="topper d-flex align-items-center">
-              		<div class="one py-2 pl-3 pr-1 align-self-stretch">
-              			<span class="day">18</span>
-              		</div>
-              		<div class="two pl-0 pr-3 py-2 align-self-stretch">
-              			<span class="yr">2019</span>
-              			<span class="mos">October</span>
-              		</div>
-              	</div>
-                <p>Por: Sandra Rodríguez Pe, Presidenta. Consultores y Abogados Internacionales.</p>
-                <p><a href="#" class="btn btn-primary">Leer Más</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-          		<div class="text px-4 py-4">
-          			<h3 class="heading mb-0"><a href="#">All you want to know about industrial laws</a></h3>
-          		</div>
-              <a href="blog-single.html" class="block-20" style="background-image: url({% static '/images/image_3.jpg' %});">
-              </a>
-              <div class="text p-4 float-right d-block">
-              	<div class="topper d-flex align-items-center">
-              		<div class="one py-2 pl-3 pr-1 align-self-stretch">
-              			<span class="day">18</span>
-              		</div>
-              		<div class="two pl-0 pr-3 py-2 align-self-stretch">
-              			<span class="yr">2019</span>
-              			<span class="mos">October</span>
-              		</div>
-              	</div>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
-              </div>
-            </div>
-          </div>
+			{% for p in posts %}
+				
+			<div class="col-md-4 d-flex ftco-animate">
+				<div class="blog-entry justify-content-end w-100">
+					<div class="text px-4 py-4">
+						<h3 class="heading mb-0"><a href="#">{{ p.titulo }}</a></h3>
+					</div>
+				<a href="blog-single.html" class="block-20" style="background-image: url('/media/{{ p.foto.name }}');">
+				</a>
+				<div class="text p-4 float-right d-block">
+					<div class="topper d-flex align-items-center">
+						<div class="one py-2 pl-3 pr-1 align-self-stretch">
+							<span class="day">{{p.publicado  | date:"d" }}</span>
+						</div>
+						<div class="two pl-0 pr-3 py-2 align-self-stretch">
+							<span class="yr">{{p.publicado  | date:"Y" }}</span>
+							<span class="mos">{{p.publicado  | date:"M" }}</span>
+						</div>
+					</div>
+					<p><a href="#" class="btn btn-primary">Leer más</a></p>
+				</div>
+				</div>
+			</div>
+
+			{% endfor %}
         </div>
       </div>
     </section>

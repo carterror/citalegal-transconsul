@@ -144,6 +144,10 @@ def showCita(request):
 
 @login_required
 def storeCita(request):
+    if not request.user.first_name or not request.user.last_name  or not request.user.ci  or not request.user.telefono  or request.user.direccion:
+        messages.warning(request, 'Complete sus datos para reservar cita')
+        return redirect(reverse_lazy('profile'))
+
     disponible = Disponible.objects.filter(fecha=request.POST['fecha1']).first()
 
     if not disponible or disponible.disponible - disponible.reservas <= 0:
