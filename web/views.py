@@ -4,13 +4,12 @@ from usuarios.models import Usuario
 from citas.models import Tramite
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from django.contrib.auth.decorators import login_required
+from configs.middleware import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
 from blog.models import Post
 from django.http import JsonResponse
 import json
-
 
 def home(request):
     context = {
@@ -33,6 +32,7 @@ def testimoniof(request):
 def blog(request):
     return render(request, 'web/pages/blog.html')
 
+@login_required
 def profile(request):
     return render(request, 'web/profile.html')
 

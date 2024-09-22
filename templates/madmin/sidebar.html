@@ -14,21 +14,6 @@
                 </a>
             </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-profile.html">
-                    <i class="align-middle" data-feather="user"></i>
-                    <span class="align-middle">Profile</span>
-                </a>
-            </li>
-            
-
-            <li class="sidebar-item {% if request.path == '/admin' %} active {% endif %}">
-                <a class="sidebar-link" href="{% url 'about' %}">
-                    <i class="align-middle" data-feather="book"></i>
-                    <span class="align-middle">Blank</span>
-                </a>
-            </li>
-
             <li class="sidebar-header">Web Cliente</li>
 
             <li class="sidebar-item {% if request.path == '/admin/trabajadores/' %} active {% endif %}">

@@ -32,6 +32,7 @@ Citas
           <table id="mdatatable" class="display">
             <thead>
               <tr>
+                <th></th>
                 <th>Fecha</th>
                 <th>Usuario</th>
                 <th>Estado</th>
@@ -41,6 +42,8 @@ Citas
             <tbody>
               {% for cita in citas %}
                 <tr>
+                  <td>{{cita.id }}</td>
+
                     <td>{{cita.fecha.fecha | date:"d / m / Y"}}</td>
                     <td>({{cita.cliente.username}}) {{cita.cliente.first_name}} {{cita.cliente.last_name}}</td>
                     <td class="px-2 text-center" >

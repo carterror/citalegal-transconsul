@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{% static '/assets/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/sweetalert2.min.css' %}">
+
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
@@ -75,14 +77,6 @@
         <div class="col-12 col-md-6 ftco-animate ">
         <div class="card shadow" style="float: right; background-color: #004b3938;">
         {% block body %}
-            {% if messages %}
-                <div>
-                    <strong>{% trans "Messages:" %}</strong>
-                    <ul>
-                        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
             
             {% block content %}
             {% endblock content %}
@@ -96,6 +90,8 @@
     </div>
 
 	{% include '../web/scripts.html' %}
+
+  {% include '../madmin/notify.html' %}
     
 
   </body>
