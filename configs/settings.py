@@ -30,13 +30,6 @@ DEBUG = True
 CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://79.116.213.58:9685',  # La IP que estás usando para acceder remotamente
-    'http://localhost:9685',  # Si usas un dominio
-]
-
-X_FRAME_OPTIONS = 'allow'
-
 # Application definition
 
 INSTALLED_APPS = [
