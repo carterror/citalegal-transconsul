@@ -27,8 +27,14 @@ SECRET_KEY = 'django-insecure-9d13(_o#4-z$ll8d%ghf+9kz_o_zucc05105!yg2o5$7ioj$oc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://79.116.213.58:9685',  # La IP que estás usando para acceder remotamente
+    'http://localhost:9685',  # Si usas un dominio
+]
+
 X_FRAME_OPTIONS = 'allow'
 
 # Application definition
