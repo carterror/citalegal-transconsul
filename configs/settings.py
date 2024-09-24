@@ -27,12 +27,9 @@ SECRET_KEY = 'django-insecure-9d13(_o#4-z$ll8d%ghf+9kz_o_zucc05105!yg2o5$7ioj$oc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'citalegal-transconsul.onrender.com',
-]
 
+CSRF_COOKIE_SECURE = True
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -49,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'citas',
     'blog',
+    'web'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'configs.urls'
@@ -132,6 +131,16 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "media/"
@@ -151,9 +160,9 @@ JAZZMIN_UI_TWEAKS = jazzmin_ui_tweaks_settings
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_URL = 'home'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login'
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mailersend.net'

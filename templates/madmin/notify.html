@@ -1,0 +1,13 @@
+{% if messages %}
+{% for message in messages %}
+    <script>
+        const icon = '{{message.tags}}'
+        const title = '{{message}}'
+        
+        Toast.fire({
+            icon,
+            title,
+        });
+    </script>
+{% endfor %}
+{% endif %}

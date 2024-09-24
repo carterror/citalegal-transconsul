@@ -1,0 +1,131 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Inicio
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+<div class="container-fluid p-0">
+
+  <h1 class="h3 mb-3">Blank Page</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="row card-header justify-between">
+          <div class="col-6">
+
+            <h5 class="card-title mb-0">Empty card</h5>
+          </div>
+          <div class="col-6 text-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Open
+              modalp</button>
+
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="mdatatable" class="display">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Nivel</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for post in trabajadores %}
+              <tr>
+                <td>{{post.nombre}}</td>
+                <td>{{post.nivel}}</td>
+                <td>{{post.descripcion}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary">
+                      <i class="bi bi-eye"></i>
+                      <span class="visually-hidden">View</span>
+                    </button>
+                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="{{ post }}">
+                      <i class="bi bi-pencil-square"></i>
+                      <span class="visually-hidden">Edit</span>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger">
+                      <i class="bi bi-trash"></i>
+                      <span class="visually-hidden">Delete</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+  var exampleModal = document.getElementById('exampleModal')
+  exampleModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    var recipient = button.getAttribute('data-bs-whatever')
+    var modalTitle = exampleModal.querySelector('.modal-title')
+    console.log(recipient);
+    var modalBodyInput = exampleModal.querySelector('.modal-body input')
+    if (recipient) {
+      modalTitle.textContent = 'Edit message to ' + recipient
+      modalBodyInput.value = recipient
+    } else {
+      modalTitle.textContent = 'New message'
+      modalBodyInput.value = ''
+    }
+  })
+</script>
+{% endblock extra_scripts %}

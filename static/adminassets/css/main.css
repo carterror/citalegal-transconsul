@@ -1,0 +1,16 @@
+
+:root {
+    --dt-row-selected: 2, 83, 65;
+  }
+
+.sidebar-content {
+    background-color: #004b39ca;
+}
+
+.sidebar-content .sidebar-item a {
+    background-color: #005a45ab !important;
+}
+
+.active {
+    border-left-color: rgb(2, 83, 65) !important;
+}

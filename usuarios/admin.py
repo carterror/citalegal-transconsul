@@ -8,13 +8,14 @@ class UserAdmin(admin.ModelAdmin):
         'username',
         'email',
         'last_name',
-        'is_superuser'
+        'is_superuser',
+        'avatar'
     )
     
     # campos que se pueden editar
     fieldsets = (
         (None, {
-            'fields': ('username', 'email',)
+            'fields': ('username', 'email', 'avatar',)
         }),
         ('Informacion Personal', {
             'fields': ('first_name', 'last_name', 'ci', 'direccion')

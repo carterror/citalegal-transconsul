@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
+from .models import Usuario
+from django.contrib import messages
+
 
 
 def send_user_mail(request):
@@ -22,21 +25,6 @@ def send_user_mail(request):
     
     return HttpResponse(msg.send())
 
-def home(request):
-    return render(request, 'web/pages/home.html')
- 
-def service(request):
-    return render(request, 'web/pages/service.html')
-
-def about(request):
-    return render(request, 'web/pages/about.html')
-
-def testimonio(request):
-    return render(request, 'web/pages/testimonio.html')
-
-def blog(request):
-    return render(request, 'web/pages/blog.html')
-
 def signin(request):
     if request.method == 'POST':
         username = request.POST["username"]
@@ -50,3 +38,44 @@ def signin(request):
     
     return render(request, 'web/login.html')
 
+def changePassword(request):
+    user = authenticate(request, username=request.user.username, password=request.POST['password'])
+    if user is None:
+        messages.error(request, 'Contraseña actual incorrecta')
+    elif request.POST['password1'] != request.POST['password2'] or not (request.POST['password1'] or request.POST['password2']):
+        messages.error(request, 'Las contraseñas no coinciden')
+    else:
+        user = Usuario.objects.get(pk=request.user.id)
+        user.set_password(request.POST['password1'])
+        user.save()
+        login(request, user)
+        messages.success(request, 'Contraseña actualizada')
+
+    return redirect(reverse_lazy('profile'))
+
+def updatePerfil(request):
+    user = Usuario.objects.get(pk=request.user.id)
+    
+    user.first_name = request.POST['nombre']
+    user.last_name = request.POST['apellido']
+    user.ci = request.POST['ci']
+    user.telefono = request.POST['telefono']
+    user.direccion = request.POST['direccion']
+
+    user.save()
+
+    messages.success(request, 'Información actualizada')
+
+    return redirect(reverse_lazy('profile'))
+
+def updatePhotoPerfil(request):
+    images = request.FILES.getlist('foto')
+
+    if images:
+        user = Usuario.objects.get(pk=request.user.id)
+        user.avatar = images[0]
+        user.save()
+
+    messages.success(request, 'Foto actualizada')
+
+    return redirect(reverse_lazy('profile'))

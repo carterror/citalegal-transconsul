@@ -20,4 +20,21 @@ from citas import views
 
 urlpatterns = [
     path('aceptar/<int:pk>', views.CustomView.as_view(), name='aceptar_cita'),
+
+    path('disponible/', views.disponible, name='disponible'),
+    path('disponible/store/', views.storeDisponible, name='storeDisponible'),
+    path('disponible/<int:pk>/update/', views.updateDisponible, name='updateDisponible'),
+    path('disponible/<int:pk>/delete/', views.deleteDisponible, name='deleteDisponible'),
+
+    path('tramite/', views.tramite, name='tramite'),
+    path('tramite/store/', views.storeTramite, name='storeTramite'),
+    path('tramite/<int:pk>/update/', views.updateTramite, name='updateTramite'),
+    path('tramite/<int:pk>/delete/', views.deleteTramite, name='deleteTramite'),
+
+    path('citas/', views.cita, name='citas'),
+
+    path('cita/store/', views.storeCita, name='storeCita'),
+    path('cita/<int:pk>/aceptar/', views.aceptarCita, name='aceptarCita'),
+    path('cita/<int:pk>/cancelar/', views.cancelarCita, name='cancelarCita'),
+
 ]

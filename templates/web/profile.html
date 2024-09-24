@@ -1,0 +1,172 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Inicio
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+.custum-file-upload {
+  height: 50;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+  display: none;
+}
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+	<!-- Testimonio opinion -->
+    <section class="ftco-section testimony-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          	<span class="subheading">Perfil</span>
+            <h2 class="mb-4">Información</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="col-md-8">
+            <div class="card">
+              <h5 class="card-header">Editar Contraseña</h5>
+              <div class="card-body">
+                <form method="post" action="{% url 'changePassword' %}">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="password">Contraseña Actual</label>
+                    <input type="password" name="password" class="form-control" id="password">
+                  </div>
+                  <div class="form-group">
+                    <label for="password1">Contraseña Nueva</label>
+                    <input type="password" class="form-control"  name="password1" id="password1">
+                  </div>
+                  <div class="form-group">
+                    <label for="password2">Confirmar Contraseña</label>
+                    <input type="password" class="form-control"  name="password2" id="password2">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+              <img src="/media/{{request.user.avatar}}" class="card-img-top" alt="..." id="fotoPerfil">
+              <div class="card-body">
+                <form method="post" action="{% url 'updatePhotoPerfil' %}" enctype="multipart/form-data" >
+                  {% csrf_token %}
+
+                  <div class="form-group">
+                    <label for="exampleFormControlFile1">Foto de perfil</label>
+                    <label class="custum-file-upload" for="file">
+                      <div class="icon">
+                        <i class="icon icon-file mr-2"></i>
+                      </div>
+                      <div class="text">
+                         <span>Subir Foto</span>
+                         </div>
+                         <input type="file" name="foto" id="file" onchange="changeFoto(this)">
+                      </label>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mt-4">
+            <div class="card">
+              <h5 class="card-header">Editar Información</h5>
+              <div class="card-body">
+                <form method="post" action="{% url 'updatePerfil' %}">
+                  {% csrf_token %}
+
+                  <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{request.user.first_name}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" value="{{request.user.last_name}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{request.user.username}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input type="email" class="form-control" id="correo" name="correo" value="{{request.user.email}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="ci">Carnet de Identidad</label>
+                    <input type="number" class="form-control" id="ci" name="ci" value="{{request.user.ci}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="number" class="form-control" id="telefono" name="telefono" value="{{request.user.telefono}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <textarea class="form-control" id="direccion" name="direccion">{{request.user.direccion}}</textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+   var nav = window.URL || window.webkitURL;
+function changeFoto(ev) {
+  const foto = document.getElementById('fotoPerfil')
+  const objeto_url = nav.createObjectURL(ev.files[0]);
+  foto.src = objeto_url
+}
+</script>
+{% endblock extra_scripts %}
