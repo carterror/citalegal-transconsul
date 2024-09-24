@@ -4,7 +4,8 @@ FROM python:3.11
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /server
+EXPOSE 80
+WORKDIR .
 
 COPY requirements.txt .
 # install python dependencies
