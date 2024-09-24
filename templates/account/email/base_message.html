@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cita Legal</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <center>
+        <img src="http://127.0.0.1:8080/static/assets/img/logo_oficial.png" alt="Cita Legal" style="width: 250px" />
+    </center>
+    <h3>
+        {% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hola <b>{{display_name}}</b>, desde Transconsul S.A.!{% endblocktrans %}
+    </h3>
+
+    <span style="padding: 10px;">
+        {% block content %}{% endblock content %}
+    </span>
+    
+    <h5>
+        {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Gracias por usar Transconsul S.A.!
+        {% endblocktrans %}
+        {% endautoescape %}
+    </h5>
+
+</body>
+</html>
