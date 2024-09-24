@@ -4,25 +4,38 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
-from .models import Usuario
-from django.contrib import messages
-from django.core.mail import send_mail
-
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 
 
 def send_user_mail(request):
-    subject = 'Cita Legal' 
-    html_message = render_to_string('emails/mail_template.html', {'message': 'Hello!'})
-    plain_message = strip_tags(html_message)
-    # Note that above we are reading content from an HTML file 
-    from_email = 'no-responder@transconsul.sa' 
-    to = 'carlos.bramila98@gmail.com' 
-
-    response = send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    subject, from_email, to = "Cita Legal", settings.EMAIL_HOST_USER, "carlos.bramila98@gmail.com"
+    text_content = "This is an important message."
+    html_content = '''
+    <img src="file:///D:/Proyects/citalegal-transconsul/legalcare-master/index.html" alt="Cita Legal" style="width: 100px; height: 100px;">
+    <h1>¡Hola!</h1>
+    <p>Este es un mensaje de prueba.</p>
+    <p>Gracias por tu atención.</p>
+    <p>Saludos.</p>
+    '''
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
     
-    return HttpResponse(response)
+    
+    return HttpResponse(msg.send())
+
+def home(request):
+    return render(request, 'web/pages/home.html')
+ 
+def service(request):
+    return render(request, 'web/pages/service.html')
+
+def about(request):
+    return render(request, 'web/pages/about.html')
+
+def testimonio(request):
+    return render(request, 'web/pages/testimonio.html')
+
+def blog(request):
+    return render(request, 'web/pages/blog.html')
 
 def signin(request):
     if request.method == 'POST':

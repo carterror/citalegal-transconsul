@@ -5,7 +5,281 @@
     {% trans "Sign In" %}
 {% endblock head_title %}
 {% block extra_head %}
+<style>
+.card {
+  transition: all 0.2s;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+}
 
+.card-inner {
+  width: inherit;
+  height: inherit;
+  background: rgba(255,255,255,.05);
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+}
+
+.card:hover {
+  transform: scale(1.001) rotate(.005deg);
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(#00897B, #004B3A);
+  border-radius: 50%;
+  position: absolute;
+  animation: move-up6 2s ease-in infinite alternate-reverse;
+}
+
+.circle:nth-child(1) {
+  top: -25px;
+  left: -25px;
+}
+
+.circle:nth-child(2) {
+  bottom: -25px;
+  right: -25px;
+  animation-name: move-down1;
+}
+
+@keyframes move-up6 {
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes move-down1 {
+  to {
+    transform: translateY(10px);
+  }
+}
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  padding: 10px;
+  height: 60px;
+  width: 100%;
+  border: 2px solid #00897B;
+  border-top: none;
+  font-size: 17px;
+  background: transparent;
+  outline: none;
+  box-shadow: 7px 7px 0px 0px #00897B;
+  transition: all 0.5s;
+  color: white;
+
+}
+
+.input:focus {
+  box-shadow: none;
+  transition: all 0.5s;
+}
+
+.label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #00897B;
+  transition: all 0.5s;
+  transform: scale(0);
+  z-index: -1;
+}
+
+.input-container .top-line {
+  position: absolute;
+  content: "";
+  background-color: #00897B;
+  width: 100%;
+  height: 2px;
+  right: 0;
+  top: 0;
+  transition: all 0.5s;
+}
+
+.input-container input[type="text"]:focus~.top-line {
+  width: 35%;
+  transition: all 0.5s;
+}
+
+.input-container input[type="password"]:focus~.top-line {
+  width: 35%;
+  transition: all 0.5s;
+}
+
+.input-container .under-line {
+  position: absolute;
+  content: "";
+  background-color: #00897B;
+  width: 0%;
+  height: 2px;
+  right: 0;
+  bottom: 0;
+  transition: all 0.5s;
+}
+
+.input-container input[type="text"]:focus~.under-line {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.input-container input[type="text"]:focus~.label {
+  top: -10px;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+
+.input-container input[type="password"]:focus~.under-line {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.input-container input[type="password"]:focus~.label {
+  top: -10px;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+button {
+  border: none;
+  display: block;
+  position: relative;
+  padding: 0.7em 2.4em;
+  font-size: 18px;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  color: #00897B;
+  z-index: 1;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+button span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -1;
+  border: 4px solid #00897B;
+}
+
+button span::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8%;
+  height: 500%;
+  background: linear-gradient(to right, rgb(34, 62, 58), rgb(31, 57, 53));
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-60deg);
+  transition: all 0.3s;
+}
+
+button:hover span::before {
+  transform: translate(-50%, -50%) rotate(-90deg);
+  width: 100%;
+  background: #00897B;
+}
+
+button:hover {
+  color: white;
+}
+
+button:active span::before {
+  background: #00897B;
+}
+/* Customize the label (the checkbox-btn) */
+.checkbox-btn {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-btn input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-btn label {
+  cursor: pointer;
+  font-size: 14px;
+}
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 2.5px solid #ffffff;
+  transition: .2s linear;
+}
+.checkbox-btn input:checked ~ .checkmark {
+  background-color: transparent;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  top: 40%;
+  width: 10px;
+  height: 14px;
+  border: 2px solid #00897B;
+  filter: drop-shadow(0px 0px 10px #00897B);
+  border-width: 0 2.5px 2.5px 0;
+  transition: .2s linear;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
+}
+
+/* Show the checkmark when checked */
+.checkbox-btn input:checked ~ .checkmark:after {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  animation: pulse 1s ease-in;
+}
+
+.checkbox-btn input:checked ~ .checkmark {
+  transform: rotate(45deg);
+  border: none;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
+  }
+}
+
+
+</style>
 {% endblock extra_head %}
 {% block content %}
 

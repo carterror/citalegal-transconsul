@@ -4,19 +4,12 @@ from usuarios.models import Usuario
 from django.contrib.auth.models import User
 # Create your models here.
 
-# TODO
-# replanificacion de citas, con secretaria, ausente(no presentado) 
-ESTADOS = [
-        ('pending', 'Pendiente'),
-        ('cancel', 'Cancelada'),
-        ('accept', 'Aceptada'),
-        ('success', 'Completada'),
-]
-
-class Disponible(models.Model):
-    disponible = models.IntegerField(default=10, null=False)
-    reservas = models.IntegerField(default=0)
-    abogado = models.BooleanField(default=False)
+class Cita(models.Model):
+    cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='clientes')
+    legalizadora = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='legalizadoras')
+    catidad_documentos = models.IntegerField('Documentos', null=True)
+    obtencion = models.BooleanField(default=False)
+    lugar = models.CharField(max_length=250, null=True)
     fecha = models.DateTimeField('Fecha', null=True)
     created_at = models.DateTimeField('Creado', auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
