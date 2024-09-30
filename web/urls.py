@@ -2,18 +2,18 @@ from django.urls import path
 from citas import views as viewCitas
 from .views import (home, service, about, testimoniof, blog, dashboard, trabajador, 
                     reservar, storeTrabajador, updateTrabajador, deleteTrabajador, profile,
-                    storeTestimonio, deleteTestimonio, testimonio, deleteAllTrabajador)
+                    storeTestimonio, deleteTestimonio, testimonio, deleteAllTrabajador, deleteAllTestimonios)
 from usuarios.views import changePassword, updatePerfil, updatePhotoPerfil
 
 urlpatterns = [
 
     path('', home, name='home'),
-    path('admin', dashboard, name='dashboard'),
+    path('admin/', dashboard, name='admin'),
 
-    path('service', service, name='service'),
-    path('about', about, name='about'),
-    path('testimonio', testimoniof, name='testimonio'),
-    path('blog', blog, name='blog'),
+    path('service', service, name='showService'),
+    path('about', about, name='showAbout'),
+    path('testimonio', testimoniof, name='showtestimonio'),
+    path('blog', blog, name='showBlog'),
 
     path('profile/', profile, name='profile'),
     path('profile/change-password/', changePassword, name='changePassword'),
@@ -32,6 +32,8 @@ urlpatterns = [
     path('admin/testimonios/', testimonio, name='testimonio'),
     path('admin/testimonios/store/', storeTestimonio, name='storeTestimonio'),
     path('admin/testimonios/<int:pk>/delete/', deleteTestimonio, name='deleteTestimonio'),
+    path('admin/testimonios/delete-all/', deleteAllTestimonios, name='deleteAllTestimonios'),
+
 
 
 ]

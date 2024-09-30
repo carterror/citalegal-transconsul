@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar navbar-expand navbar-light navbar-bg">
     <a class="sidebar-toggle js-sidebar-toggle">
         <i class="hamburger align-self-center"></i>
@@ -165,7 +166,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="/media/{{request.user.avatar}}" class="avatar img-fluid rounded me-1" alt="{{request.user}}" />
+                    <img src="{% if request.user.avatar %}/media/{{request.user.avatar}}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %}" class="avatar img-fluid rounded me-1" alt="{{request.user}}" />
                     <span class="text-dark">{{request.user}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">

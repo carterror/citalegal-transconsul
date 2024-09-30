@@ -20,14 +20,22 @@ Reservas
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-          	<span class="subheading">Reservass</span>
+          	<span class="subheading">Reservas</span>
             <h2 class="mb-4">Reservaciones</h2>
           </div>
         </div>
         <div class="row ftco-animate">
           <div class="col-md-12">
             <div class="card">
-              <h5 class="card-header">Información de la cita</h5>
+              <div class="row card-header">
+                <div class="col-md-6 align-self-center" >
+                  <h5 class="card-title mb-0">Información de la cita</h5>
+                  </div>
+                <div class="col-md-6 align-self-rigth text-end" >
+                  <a href="{% url 'reservar' %}#show" class="btn btn-primary">Reservar</a>
+                </div>
+              </div>
+              </div>
               <div class="card-body">
                 <table id="mdatatable" class="display">
                   <thead>
@@ -35,7 +43,6 @@ Reservas
                       <th>Fecha</th>
                       <th>Usuario</th>
                       <th>Estado</th>
-                      <th class="text-right">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -53,18 +60,6 @@ Reservas
                             {% elif cita.estado == 'accept' %}
                               <span class="badge bg-primary p-2 w-50">Aceptado</span>
                             {% endif %}
-                          </td>
-                          <td class="text-right" >
-                              <div class="btn-group">
-                                  <a type="button" class="btn btn-outline-success" href="{% url 'aceptarCita' cita.id %}" data-toggle="tooltip" data-bs-placement="top" title="Aceptar">
-                                    <i class="icon icon-phone "></i>
-                                  <span class="visually-hidden">Aceptar</span>
-                                  </a>
-                                  <a type="button" class="btn btn-outline-danger" href="{% url 'cancelarCita' cita.id %}" data-toggle="tooltip" data-bs-placement="top" title="Cancelar">
-                                    <i class="icon icon-phone "></i>
-                                  <span class="visually-hidden">Cancelar</span>
-                                  </a>
-                              </div>
                           </td>
                       </tr>
                     {% endfor %}

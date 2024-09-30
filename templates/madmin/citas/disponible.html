@@ -34,17 +34,21 @@ Disponible
           <table id="mdatatable" class="display">
             <thead>
               <tr>
+                <th></th>
+
                 <th>Fecha</th>
-                <th>Cantidad</th>
-                <th>Reservadas</th>
-                <th>Tipo</th>
-                <th>Acciones</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Reservadas</th>
+                <th class="text-center">Tipo</th>
+                <th class="text-end">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {% for disponible in disponibles %}
                 <tr>
-                    <td>{{ disponible.fecha | date:"d / m / Y"  }}</td>
+                  <td>{{ disponible.id }}</td>
+
+                    <td>{{ disponible.fecha | date:"d/m/Y"  }}</td>
                     <td class="text-center">{{disponible.disponible}}</td>
                     <td class="text-center">{{disponible.reservas}}</td>
 

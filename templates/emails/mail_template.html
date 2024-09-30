@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cita Legal</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <center>
+        <img src="https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/330847162_2033945643461267_4492487874108316433_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=DBeUa7PfgdYQ7kNvgE9-edN&_nc_ht=scontent-mia3-1.xx&_nc_gid=AInXonrUWqkcL9E6sPFYx7m&oh=00_AYB249PVQqY_SQMAdl5sWJrxA6C8YT0PA_2WHXmuMP1klw&oe=67005862" alt="Cita Legal" style="width: 250px" />
+    </center>
+    <h3>
+        Hola <b>{{user}}</b>, desde Transconsul S.A.!
+    </h3>
+    <br>
+    <span style="padding: 10px;">
+        Su cita ha sido aceptada:
+    <br>
+
+        Fecha: {{fecha.fecha}}
+    <br>
+
+        Hora: 8am - 12pm
+    </span>
+    <br>
+    <a href="{% url 'showCita' %}">Ver Citas aquí</a>
+    <h5>
+        Gracias por usar Transconsul S.A.!
+    </h5>
+    <p>Saludos.</p>
+
+</body>
+</html>

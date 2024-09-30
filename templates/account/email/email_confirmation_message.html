@@ -1,0 +1,11 @@
+{% extends "account/email/base_message.html" %}
+{% load account %}
+<p>
+    {% block content %}{% user_display user as user_display %}Estás recibiendo este correo electrónico porque el usuario <b>{{ display_name }}</b> ha proporcionado tu dirección de correo electrónico para registrar una cuenta en Transconsul S.A..
+</p>
+<a style="background-color: #00897B; text-decoration: none; color: aliceblue; padding: 10px;" href="{{ activate_url }}">Activar Cuenta</a> 
+<p>
+    Para confirmar que esto es correcto, dirijase a: <a href="{{ activate_url }}">{{ activate_url }}</a> 
+</p>
+
+{% endblock content %}

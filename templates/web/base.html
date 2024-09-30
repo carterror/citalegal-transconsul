@@ -1,13 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <title>Transconsul S.A. - {% block title %}{% endblock title %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	  <meta name="author" content="Carlos Brayan Rámila Chorens" >
 
-    <link rel="shortcut icon" href="{% static '/images/icon_oficial.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static '/assets/img/icon_oficial.png' %}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
 	{% include './styles.html' %}
@@ -35,12 +35,12 @@
 						</h1>
             <!-- <h1 class="mb-4">Attorneys Fighting For Your Freedom</h1> -->
             <p class="mb-4">Servicios profesionales de asistencia y asesoría legal</p>
-            <p><a href="#" id="obtener_ayuda" class="btn btn-primary mr-md-4 py-2 px-4">Obtenga asesoramiento legal <span class="ion-ios-arrow-forward"></span></a></p>
+            <p><a href="{% url 'reservar' %}#show" id="obtener_ayuda" class="btn btn-primary mr-md-4 py-2 px-4">Obtenga asesoramiento legal <span class="ion-ios-arrow-forward"></span></a></p>
           </div>
         </div>
       </div>
     </div>
-
+  <a name="show" ></a>
 	{% block extra_content %}
 	{% endblock extra_content %}
 		

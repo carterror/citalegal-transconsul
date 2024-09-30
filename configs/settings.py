@@ -164,10 +164,11 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mailersend.net'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'no.responder.correo.98@gmail.com'
+EMAIL_HOST_PASSWORD = 'yzexkfqoanwcbctv'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'MS_TDpakj@trial-neqvygm12qwg0p7w.mlsender.net'
-EMAIL_HOST_PASSWORD = 'HyZIMEAkUtKslMOJ'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

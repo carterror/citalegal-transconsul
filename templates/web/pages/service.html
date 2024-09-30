@@ -27,59 +27,22 @@ Inicio
         <div class="row">
 			<div class="col-md-12">
 				<div class="carousel-case owl-carousel ftco-owl">
+					{% for t in tramites %}
 					<div class="item">
 						<div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-1.jpg' %});">
 		        			<div class="text text-center">
-								<h3><a href="#">LEGALIZACIONES</a></h3>
-		        				<span>SERVICIOS LEGALES ESPECIALIZADOS DE ASISTENCIA, ASESORÍA Y REPRESENTACIÓN LEGAL PARA LA CONCERTACIÓN DE NEGOCIOS E INVERSIÓN EXTRANJERA</span>
+								<h3><a href="#">{{t.precio}}</a></h3>
+		        				<span>{{t.nombre}}</span>
 		        			</div>
 		        		</div>
 					</div>
-					<div class="item">
-							  <div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-3.jpg' %});">
-								  <div class="text text-center">
-									  <h3><a href="#">ASISTENCIA LEGAL</a></h3>
-									  <span>EN CONCERTACIÓN DE NEGOCIOS E INVERSIÓN EXTRANJERA</span>
-								  </div>
-							  </div>
-					</div>
-					<div class="item">
-		        		<div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-2.jpg' %});">
-		        			<div class="text text-center">
-		        				<h3><a href="#">SERVICIOS NOTARIALES</a></h3>
-		        				<span>Abarcan toda la gama de escrituras públicas interesadas por personas jurídicas y naturales extranjeras.</span>
-		        			</div>
-		        		</div>
-              </div>
-              <div class="item">
-		        		<div class="case img d-flex align-items-center justify-content-center" style="background-image: url({% static '/images/case-4.jpg' %});">
-		        			<div class="text text-center">
-		        				<h3><a href="#">Legal Ultimo</a></h3>
-		        				<span>ultimo</span>
-		        			</div>
-		        		</div>
-              </div>
+					{% endfor %}
             </div>
         	</div>
-			<div class="row mt-5">
-				<div class="col text-center">
-				  <div class="block-27">
-					<ul>
-					  <li><a href="#">&lt;</a></li>
-					  <li class="active"><span>1</span></li>
-					  <li><a href="#">2</a></li>
-					  <li><a href="#">3</a></li>
-					  <li><a href="#">4</a></li>
-					  <li><a href="#">5</a></li>
-					  <li><a href="#">&gt;</a></li>
-					</ul>
-				  </div>
-				</div>
-			  </div>
         </div>
     	</div>
     </section>
-	
+
 {% endblock extra_content %}
 
 {% block extra_scripts %}

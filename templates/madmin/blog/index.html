@@ -25,12 +25,12 @@ Artículos
         <div class="row card-header justify-between">
           <div class="col-6 align-self-center">
 
-            <h5 class="card-title mb-0">Listado de Artículos</h5>
+            <h5 class="card-title mb-0">Listado de artículos</h5>
           </div>
           <div class="col-6 text-end">
             <div class="btn-group">
               <button type="button" class="btn btn-danger" data-csrf='{{ csrf_token }}' data-address="{% url 'deleteAllBlog' %}" onclick="deleteAll(this)">Eliminar</button>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear Nuevo</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Crear nuevo</button>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ Artículos
           </div>
           <div class="mb-3">
             <label for="foto" class="form-label">Foto</label>
-            <input class="form-control" type="file" id="foto" name="foto" id="foto">
+            <input class="form-control" type="file" id="foto" name="foto" value="Adjuntar documento">
           </div>
           <div class="mb-3" id="parentDes">
             <label for="descri" class="form-label">Descripción</label>
@@ -167,13 +167,13 @@ Artículos
     if (obj) {
         console.log(`${obj.cuerpo}`);
         form.setAttribute('action', address)
-        modalTitle.textContent = 'Editar Arículo ' + obj.titulo
+        modalTitle.textContent = 'Editar artículo ' + obj.titulo
         titulo.value = obj.titulo
         actualizarContenido(obj.cuerpo)
         
     } else {
         form.setAttribute('action', "{% url 'storeBlog' %}")
-        modalTitle.textContent = 'Nuevo Arículo'
+        modalTitle.textContent = 'Nuevo artículo'
         titulo.value = ''
         descripcion.value = ''
     }

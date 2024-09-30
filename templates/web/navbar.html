@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><img src="{% static '/images/logo_oficial.png' %}" width="150px" alt="" srcset=""></a>
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/assets/img/logo_oficial.png' %}" width="250px" alt="" srcset=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -10,21 +10,23 @@
         <ul class="navbar-nav ml-auto">
           
           <li class="nav-item {% if request.path == '/home/' %} active {% endif %}"><a href="{% url 'home' %}" class="nav-link">Inicio</a></li>
-          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">Nosotros</a></li>
-          <li class="nav-item"><a href="{% url 'service' %}" class="nav-link">Servicios</a></li>
-          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="{% url 'testimonio' %}" class="nav-link">Contacto</a></li>
+          <li class="nav-item"><a href="{% url 'showAbout' %}#show" class="nav-link">Nosotros</a></li>
+          <li class="nav-item"><a href="{% url 'showService' %}#show" class="nav-link">Servicios</a></li>
+          <li class="nav-item"><a href="{% url 'showBlog' %}#show" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="{% url 'showtestimonio' %}#show" class="nav-link">Contacto</a></li>
           {% if request.user.is_authenticated %}
 
-          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="#" class="nav-link py-1" style="border: 2px solid #ffffff; background-color: #00897B; border-radius: 0px !important;">Cita</a></li>
+          <li class="nav-item cta" style="border-radius: 0px !important;"><a href="{% url 'reservar' %}#show" class="nav-link py-1" style="border: 2px solid #ffffff; background-color: #00897B; border-radius: 0px !important;">Cita</a></li>
           
           <li class="nav-item cta dropdown" style="border-radius: 0px !important;">
             <a href="#" class="nav-link dropdown-toggle py-1" style="border: 2px solid #ffffff; background-color: #00897B; border-radius: 0px !important;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="/media/{{request.user.avatar}}" alt="avatar" class="rounded" srcset="" height="25px"> {{ request.user }}
+                <img src="{% if request.user.avatar %}/media/{{request.user.avatar}}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %}" alt="avatar" class="rounded" srcset="" height="25px"> {{ request.user }}
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{% url 'citas' %}"><i class="icon icon-phone mr-2"></i> Citas</a>
-                <a class="dropdown-item" href="{% url 'profile' %}"><i class="icon icon-user mr-2"></i> Cuenta</a>
+                <a class="dropdown-item" href="{% url 'reservar' %}#show"><i class="icon icon-phone mr-2"></i> Reservar</a>
+                <a class="dropdown-item" href="{% url 'showCita' %}#show"><i class="icon icon-phone mr-2"></i> Citas</a>
+
+                <a class="dropdown-item" href="{% url 'profile' %}#show"><i class="icon icon-user mr-2"></i> Cuenta</a>
                 {% if request.user.is_staff %}
 
                 <div class="dropdown-divider"></div>

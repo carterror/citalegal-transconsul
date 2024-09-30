@@ -8,17 +8,10 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
-# Create your views here.
+from django.core.mail import send_mail
 
-class CustomView(TemplateView):
-    template_name = "citas/aceptar.html"
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx.update(site.each_context(self.request))
-        ctx['cita'] = Cita.objects.get(pk=self.kwargs['pk'])
-        return ctx
-    
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 #region disponible
 
@@ -42,7 +35,7 @@ def storeDisponible(request):
     )
 
     messages.success(request, 'Guardado con éxito')
-    return redirect('disponible')
+    return redirect(reverse_lazy('disponible'))
 
 @login_required
 @staff_member_required
@@ -56,7 +49,7 @@ def updateDisponible(request, pk):
     disponible.save()
 
     messages.success(request, 'Guardado con éxito')
-    return redirect('disponible')
+    return redirect(reverse_lazy('disponible'))
 
 @login_required
 @staff_member_required
@@ -67,7 +60,7 @@ def deleteDisponible(request, pk):
     
     messages.success(request, 'Eliminado con éxito.')
     
-    return redirect('disponible')
+    return redirect(reverse_lazy('disponible'))
 
 
 #endregion tramite
@@ -92,7 +85,7 @@ def storeTramite(request):
     )
 
     messages.success(request, 'Guardado con éxito')
-    return redirect('tramite')
+    return redirect(reverse_lazy('tramite'))
 
 @login_required
 @staff_member_required
@@ -107,7 +100,7 @@ def updateTramite(request, pk):
     tramite.save()
 
     messages.success(request, 'Guardado con éxito')
-    return redirect('tramite')
+    return redirect(reverse_lazy('tramite'))
 
 @login_required
 @staff_member_required
@@ -118,7 +111,7 @@ def deleteTramite(request, pk):
     
     messages.success(request, 'Eliminado con éxito.')
     
-    return redirect('tramite')
+    return redirect(reverse_lazy('tramite'))
 
 #endregion tramite
 
@@ -144,15 +137,15 @@ def showCita(request):
 
 @login_required
 def storeCita(request):
-    if not request.user.first_name or not request.user.last_name  or not request.user.ci  or not request.user.telefono  or request.user.direccion:
+    if not request.user.first_name or not request.user.last_name  or not request.user.ci or not request.user.telefono or not request.user.direccion:
         messages.warning(request, 'Complete sus datos para reservar cita')
-        return redirect(reverse_lazy('profile'))
+        return redirect(reverse_lazy('profile')+'#show')
 
     disponible = Disponible.objects.filter(fecha=request.POST['fecha1']).first()
 
     if not disponible or disponible.disponible - disponible.reservas <= 0:
         messages.error(request, 'No hay disponibilidad para esta fecha')
-        return redirect(reverse_lazy('reservar'))
+        return redirect(reverse_lazy('reservar')+'#show')
     else:
         tramite = Tramite.objects.get(pk=request.POST['tramite'])
         cita = Cita.objects.create(
@@ -167,18 +160,30 @@ def storeCita(request):
         disponible.reservas += 1
         disponible.save()
 
-        messages.error(request, 'Cita reservada con éxito, se le notificará su estado')
-        return redirect(reverse_lazy('reservar'))
+        messages.success(request, 'Cita reservada con éxito, se le notificará su estado')
+        return redirect(reverse_lazy('showCita')+'#show')
 
 @login_required
 @staff_member_required
 def aceptarCita(request, pk):
     cita = get_object_or_404(Cita, pk=pk)
+    context = {
+        'fecha': cita.fecha,
+        'user': cita.cliente.username
+    }
+    subject = 'Cita Legal' 
+    html_message = render_to_string('emails/mail_template.html', context)
+    plain_message = strip_tags(html_message)
+    # Note that above we are reading content from an HTML file 
+    from_email = 'no.responder.correo.98@gmail.com'
+    to = cita.cliente.email
+
+    response = send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
     cita.estado = 'accept'
     cita.save()
-    
-    messages.success(request, 'Cita Aceptada')
+
+    messages.success(request, 'Cita aceptada, el cliente fue notificado')
     
     return redirect('citas')
 

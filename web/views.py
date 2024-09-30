@@ -4,8 +4,7 @@ from usuarios.models import Usuario
 from citas.models import Tramite
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from configs.middleware import login_required
-from django.contrib.admin.views.decorators import staff_member_required
+from configs.middleware import login_required, staff_member_required
 from django.urls import reverse_lazy
 from blog.models import Post
 from django.http import JsonResponse
@@ -21,35 +20,39 @@ def home(request):
     return render(request, 'web/pages/home.html', context)
  
 def service(request):
-    return render(request, 'web/pages/service.html')
+    context = {
+        "tramites": Tramite.objects.all(),
+    }
+    return render(request, 'web/pages/service.html', context)
 
 def about(request):
-    return render(request, 'web/pages/about.html')
+    context = {
+        "testimonios" : Testimonio.objects.all(),
+    }
+    return render(request, 'web/pages/about.html', context)
 
 def testimoniof(request):
-    return render(request, 'web/pages/testimonio.html')
+    context = {
+        "testimonios" : Testimonio.objects.all(),
+    }
+    return render(request, 'web/pages/testimonio.html', context)
 
 def blog(request):
-    return render(request, 'web/pages/blog.html')
+    context = {
+        "posts": Post.objects.all(),
+    }
+    return render(request, 'web/pages/blog.html', context)
 
 @login_required
 def profile(request):
     return render(request, 'web/profile.html')
 
+@login_required
 def reservar(request):
     context = {
         "tramites": Tramite.objects.all()
     }
     return render(request, 'web/cita.html', context)
-
-@login_required
-@staff_member_required
-def dashboard(request):
-    messages.warning(request, 'asfqwiufbqwiufbwqoiu fbwqouibiou isbduiqwbdi')
-    context = {
-        "trabajadores" : Trabajador.objects.all(),
-    }
-    return render(request, 'madmin/blank.html', context)
 
 @login_required
 @staff_member_required
@@ -81,7 +84,7 @@ def storeTrabajador(request):
     )
 
     messages.success(request, 'Guardado con éxito')
-    return redirect('trabajador')
+    return redirect(reverse_lazy('trabajador'))
 
 @login_required
 @staff_member_required
@@ -99,7 +102,8 @@ def updateTrabajador(request, pk):
     trabajador.save()
 
     messages.success(request, 'Guardado con éxito')
-    return redirect('trabajador')
+    return redirect(reverse_lazy('trabajador'))
+
 
 @login_required
 @staff_member_required
@@ -134,7 +138,7 @@ def deleteAllTrabajador(request):
 
         messages.success(request, 'Eliminado con éxito.')
         
-        return redirect('trabajador')
+        return redirect(reverse_lazy('trabajador'))
 
 
 @login_required
@@ -171,3 +175,28 @@ def deleteTestimonio(request, pk):
     messages.success(request, 'Eliminado con éxito.')
     
     return redirect('testimonio')
+
+
+@login_required
+@staff_member_required
+def deleteAllTestimonios(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            print(data)
+            # Procesa los datos aquí
+            for id in list(data):
+                testimonio = get_object_or_404(Testimonio, pk=id)
+                testimonio.delete()
+
+            response_data = {'message': 'Datos eliminados correctamente'}
+
+            return JsonResponse(response_data, status=200)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Datos JSON inválidos'}, status=400)
+
+    else:
+
+        messages.success(request, 'Eliminado con éxito.')
+        
+        return redirect(reverse_lazy('testimonio'))

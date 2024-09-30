@@ -1,5 +1,5 @@
 from django.urls import path
-from blog import views
+from blog import views as viewBlog
 
 urlpatterns = [
     
@@ -7,10 +7,10 @@ urlpatterns = [
     # path('crear', views.PostCreate.as_view(), name='post_create'),
     # path(r'^posts/(?P<slug>[-\w]+)/$', views.PostDetail.as_view(), name='post'),
 
-    path('admincitas/blog/', views.blog, name='blog'),
-    path('admincitas/blog/store/', views.storeBlog, name='storeBlog'),
-    path('admincitas/blog/<int:pk>/update/', views.updateBlog, name='updateBlog'),
-    path('admincitas/blog/<int:pk>/delete/', views.deleteBlog, name='deleteBlog'),
-    path('admincitas/blog/delete-all/', views.deleteAllBlog, name='deleteAllBlog'),
+    path('', viewBlog.blog, name='blog'),
+    path('store/', viewBlog.storeBlog, name='storeBlog'),
+    path('<int:pk>/update/', viewBlog.updateBlog, name='updateBlog'),
+    path('<int:pk>/delete/', viewBlog.deleteBlog, name='deleteBlog'),
+    path('delete-all/', viewBlog.deleteAllBlog, name='deleteAllBlog'),
 
 ]

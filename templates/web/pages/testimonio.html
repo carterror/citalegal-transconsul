@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-Inicio
+Contacto
 {% endblock title %}
 
 {% block extra_head %}
@@ -15,117 +15,57 @@ Inicio
 
 {% block extra_content %}
 
-	<!-- Testimonio form -->
-	<section class="ftco-consultation ftco-section ftco-no-pt ftco-no-pb img" style="background-image: url({% static '/images/landing4.png' %});">
-			<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row d-md-flex justify-content-end">
-    			<div class="col-md-6 half p-3 py-5 pl-md-5 ftco-animate heading-section heading-section-white">
-    				<span class="subheading">Testimonio</span>
-    				<h2 class="mb-4">Dejenos su opinión</h2>
-    				<form action="#" class="consultation">
-	            <div class="form-group">
-	              <input type="text" class="form-control" placeholder="Su nombre">
-	            </div>
-	            <div class="form-group">
-	              <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Mensaje"></textarea>
-	            </div>
-	            <div class="form-group">
-	              <input type="submit" value="Enviar" class="btn btn-dark py-3 px-4">
-	            </div>
-	          </form>
-    			</div>
-    		</div>
-    	</div>
-    </section>
+<section class="ftco-section contact-section">
+  <div class="container">
+    <div class="row d-flex mb-5 contact-info">
+      <div class="col-md-12 mb-4">
+        <h2 class="h3">Información de contacto</h2>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-3">
+        <p><span>Dirección:</span> Calle 49B #3428 e/ 34 y 49A, Kohly, Playa</p>
+      </div>
+      <div class="col-md-3">
+        <p><span>Teléfono:</span> <a href="tel://+5372041503">	+53 7204-1503 (Pizarra) Ext. 108</a></p>
+      </div>
+      <div class="col-md-3">
+        <p><span>Email:</span> <a href="presidencia.transconsul@enet.cu">presidencia.transconsul@enet.cu</a></p>
+      </div>
+      <div class="col-md-3">
+        <p><span>Website</span> <a href="#">transconsulsa.com</a></p>
+      </div>
+    </div>
+    <div class="row block-9 no-gutters">
+      <div class="col-lg-6 order-md-last d-flex">
+        <form action="#" class="bg-light p-5 contact-form">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Correo">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Asunto">
+          </div>
+          <div class="form-group">
+            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Mensaje"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Enviar" class="btn btn-primary py-3 px-5">
+          </div>
+        </form>
+      
+      </div>
 
-	<!-- Testimonio opinion -->
-    <section class="ftco-section testimony-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-          	<span class="subheading">Testimonios</span>
-            <h2 class="mb-4">Clientes satisfechos</h2>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static '/images/person_1.jpg' %});"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static '/images/person_2.jpg' %});"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static '/images/person_3.jpg' %});"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static '/images/person_1.jpg' %});"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static '/images/person_2.jpg' %});"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="col-lg-6 d-flex">
+        <div id="map" class="bg-white">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000.7968373521453!2d-82.41011780517508!3d23.110856497007852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88cd77cd4c468afd%3A0xbff964ee1cddcf48!2sOficinas%20Transconsul!5e0!3m2!1ses!2scu!4v1727698605532!5m2!1ses!2scu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
 
 {% endblock extra_content %}
 

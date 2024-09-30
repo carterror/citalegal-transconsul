@@ -4,58 +4,95 @@
     {% trans "Signup" %}
 {% endblock head_title %}
 {% block content %}
-<div class="card-title text-white h2 pt-4 px-4">Acceder al sistema
-    <p>
-        {% blocktrans %}Si ya tiene una cuenta, por favor
-    <a href="{{ login_url }}">inicie sesión</a>.{% endblocktrans %}
-    </p>
-</div>
-<div class="card-body border-top">
-<form method="post" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    <div class="form-group">
-    <label for="username">Usuario o correo electrónico</label>
-    <input type="text" class="form-control" name="login" id="username" placeholder="juanito" aria-describedby="emailHelp" style="background-color: #004b39 !important; color: white !important; border: 0px;">
-    </div>
-    <div class="form-group">
-    <label for="password">Contraseña</label>
-    <input type="password" class="form-control" name="password" id="password" style="background-color: #004b39 !important; color: white !important; border: 0px;">
-    </div>
-    <p>
-        <label for="id_remember">Recordarme:</label>
-        <input type="checkbox" name="remember" id="id_remember">
-    </p>
-    <div class="d-flex justify-content-between">
-        <a href="/accounts/password/reset/">¿Has olvidado tu contraseña?</a>
-        <button type="submit" class="btn btn-primary card-link float-right">Iniciar sesión</button>
-    </div>
-</form>
-</div>
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="">sign in</a>.{% endblocktrans %}
-    </p>
-    {% url 'account_signup' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
+<div class="card">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="card-inner">
+        <div class="card-title text-white h2 pt-4 px-4"> {% trans "Sign Up" %}
+            <p>
+                {% blocktrans %}Si ya tiene una cuenta, por favor
+            <a href="{{ login_url }}">inicie sesión</a>.{% endblocktrans %}
+            </p>
+        </div>
+        <div class="card-body border-top">
+            {% url 'account_signup' as action_url %}
+            {% element form form=form method="post" action=action_url  tags="entrance,signup,novalidate" %}
+                {% if redirect_field_value %}
+                    <input type="hidden"
+                        name="{{ redirect_field_name }}"
+                        value="{{ redirect_field_value }}" />
+                {% endif %}
+        
+                {% slot body %}
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <div class="input-container">
+                    <!--             <input type="text" class="form-control" name="login" id="username" placeholder="juanito" aria-describedby="emailHelp" style="background-color: #004b39 !important; color: white !important; border: 0px;"> -->
+                    <input type="email" name="email" id="email" class="input" placeholder="Correo electrónico" autocomplete="off" required />
+                    <label class="label" for="email">Correo electrónico</label>
+                    <div class="top-line"></div>
+                    <div class="under-line"></div>
+                </div>   
+                <div class="text-danger mt-1" >
+                {{ form.email.errors }}
+                </div> 
+                    
+                    </div>
+                <div class="form-group ">
+                    <div class="input-container">
+                        <!--             <input type="text" class="form-control" name="login" id="username" placeholder="juanito" aria-describedby="emailHelp" style="background-color: #004b39 !important; color: white !important; border: 0px;"> -->
+                        <input type="text" name="username" id="username" class="input" placeholder="Usuario" autocomplete="off" required />
+                        <label class="label" for="username">Usuario</label>
+                        <div class="top-line"></div>
+                        <div class="under-line"></div>
+                    </div>   
+                    <div class="text-danger mt-1" >
+                    {{ form.username.errors }}
+                    </div> 
+
+                </div>
+                <div class="form-group ">
+                    <div class="input-container">
+                        <!--             <input type="text" class="form-control" name="login" id="username" placeholder="juanito" aria-describedby="emailHelp" style="background-color: #004b39 !important; color: white !important; border: 0px;"> -->
+                        <input type="password" name="password1" id="password1" class="input" placeholder="Contraseña" autocomplete="off" required />
+                        <label class="label" for="password1">Contraseña</label>
+                        <div class="top-line"></div>
+                        <div class="under-line"></div>
+                    </div>   
+                    <div class="text-danger mt-1" >
+                    {{ form.password1.errors }}
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <div class="input-container">
+                        <!--             <input type="text" class="form-control" name="login" id="username" placeholder="juanito" aria-describedby="emailHelp" style="background-color: #004b39 !important; color: white !important; border: 0px;"> -->
+                        <input type="password" name="password2" id="password2" class="input" placeholder="Confirmar Contraseña" autocomplete="off" required />
+                        <label class="label" for="password2">Confirmar Contraseña</label>
+                        <div class="top-line"></div>
+                        <div class="under-line"></div>
+                    </div>   
+                    <div class="text-danger mt-1" >
+                    {{ form.password2.errors }}
+                    </div> 
+                    </div>
+       
+                {% endslot %}
+            {% slot actions %}
+        
+        
+            <div class="d-flex justify-content-between mu-2">
+                <button> {% trans "Sign Up" %}
+                  <span></span>
+                </button>
+              </div>
+            {% endslot %}
+            
+            {% if SOCIALACCOUNT_ENABLED %}
+            {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
             {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
             {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}

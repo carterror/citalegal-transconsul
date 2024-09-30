@@ -239,7 +239,13 @@ Inicio
                   <div class="text">
                     <p class="mb-4">{{ t.comentario }}</p>
                     <div class="d-flex align-items-center">
+						{% if t.user.avatar %}
                     	<div class="user-img" style="background-image: url('media/{{t.user.avatar}}');"></div>
+
+						{% else %}
+                    	<div class="user-img" style="background-image: url({% static '/assets/img/icon_oficial.png' %});"></div>
+
+						{% endif %}
                     	<div class="pl-3">
 		                    <p class="name">{{ t.user.first_name }}</p>
 		                    <span class="position">{{ t.servicio }}a</span>

@@ -56,7 +56,6 @@ Inicio
 {% endblock extra_head %}
 
 {% block extra_content %}
-
 	<!-- Testimonio opinion -->
     <section class="ftco-section testimony-section">
       <div class="container">
@@ -92,7 +91,7 @@ Inicio
           </div>
           <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-              <img src="/media/{{request.user.avatar}}" class="card-img-top" alt="..." id="fotoPerfil">
+              <img src="{% if request.user.avatar %}/media/{{request.user.avatar}}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %}" class="card-img-top" alt="..." id="fotoPerfil">
               <div class="card-body">
                 <form method="post" action="{% url 'updatePhotoPerfil' %}" enctype="multipart/form-data" >
                   {% csrf_token %}

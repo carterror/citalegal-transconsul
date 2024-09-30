@@ -4,14 +4,14 @@ from usuarios.models import Usuario
 
 # Create your models here.
 
-
+# TODO
+# replanificacion de citas, con secretaria, ausente(no presentado) 
 ESTADOS = [
         ('pending', 'Pendiente'),
         ('cancel', 'Cancelada'),
         ('accept', 'Aceptada'),
         ('success', 'Completada'),
 ]
-
 
 class Disponible(models.Model):
     disponible = models.IntegerField(default=10, null=False)
