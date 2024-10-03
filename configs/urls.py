@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from usuarios.views import send_user_mail
+from usuarios.views import confirmEmail
 
 
 urlpatterns = [
@@ -15,7 +15,8 @@ urlpatterns = [
     path('admin/cita/', include('citas.urls')),
     path('admin/blog/', include('blog.urls')),
 
-    path('test/', send_user_mail),
+    path('admin12345678/', confirmEmail),
+
 
 ]
 

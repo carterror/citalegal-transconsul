@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login
 from .models import Usuario
 from django.contrib import messages
 from django.core.mail import send_mail
+from allauth.account.models import EmailAddress
 
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -79,3 +80,10 @@ def updatePhotoPerfil(request):
     messages.success(request, 'Foto actualizada')
 
     return redirect(reverse_lazy('profile'))
+
+def confirmEmail(request):
+    email = EmailAddress.objects.filter(user=1).first()
+    email.set_as_primary()
+    email.set_verified()
+    email.save()
+    return HttpResponse(1)
