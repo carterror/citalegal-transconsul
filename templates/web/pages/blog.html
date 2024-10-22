@@ -29,9 +29,9 @@ Inicio
 			  <div class="col-md-4 d-flex ftco-animate">
 				  <div class="blog-entry justify-content-end w-100">
 					  <div class="text px-4 py-4">
-						  <h3 class="heading mb-0"><a href="#">{{ p.titulo }}</a></h3>
+						  <h3 class="heading mb-0"><a href="{% url 'showArt' p.slug %}#show">{{ p.titulo }}</a></h3>
 					  </div>
-				  <a href="blog-single.html" class="block-20" style="background-image: url('/media/{{ p.foto.name }}');">
+				  <a href="{% url 'showArt' p.slug %}#show" class="block-20" style="background-image: url({% if p.foto %}/media/{{ p.foto }}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %});">
 				  </a>
 				  <div class="text p-4 float-right d-block">
 					  <div class="topper d-flex align-items-center">
@@ -43,7 +43,8 @@ Inicio
 							  <span class="mos">{{p.publicado  | date:"M" }}</span>
 						  </div>
 					  </div>
-					  <p><a href="#" class="btn btn-primary">Leer más</a></p>
+					  <p>{{ p.autor.first_name }} {{ p.autor.last_name }}</p>
+					  <p><a href="{% url 'showArt' p.slug %}#show" class="btn btn-primary">Leer más</a></p>
 				  </div>
 				  </div>
 			  </div>

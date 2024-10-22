@@ -1,31 +1,34 @@
 {% load static %}
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html" style="background-color: #ffffff; padding: 5px; padding-left: 10 px;">
-         
-                <img src="{% static '/assets/img/logo_oficial.png' %}" width="210px" alt="">
-            
+        <a class="sidebar-brand" href="{% url 'home' %}" style="background-color: #ffffff; padding: 5px; padding-left: 10 px;">
+            <img src="{% static '/assets/img/logo_oficial.png' %}" class="ms-4" width="200px" alt="">
         </a>
 
         <ul class="sidebar-nav">
             <li class="sidebar-header">Inicio</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="index.html">
+            <li class="sidebar-item {% if request.path == '/admin/' %} active {% endif %}" >
+                <a class="sidebar-link" href="{% url 'admin' %}">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Panel</span>
                 </a>
             </li>
-
+            <li class="sidebar-item {% if request.path == '/admin/usuarios/' %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'usuario' %}">
+                    <i class="align-middle" data-feather="users"></i>
+                    <span class="align-middle">Usuarios</span>
+                </a>
+            </li>
             <li class="sidebar-header">Web Cliente</li>
 
             <li class="sidebar-item {% if request.path == '/admin/trabajadores/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'trabajador' %}">
-                    <i class="align-middle" data-feather="book"></i>
+                    <i class="align-middle" data-feather="users"></i>
                     <span class="align-middle">Trabajadores</span>
                 </a>
             </li>
-
+            
             <li class="sidebar-item {% if request.path == '/admin/testimonios/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'testimonio' %}">
                     <i class="align-middle" data-feather="book"></i>
@@ -38,14 +41,14 @@
 
             <li class="sidebar-item {% if request.path == '/admin/disponible/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'disponible' %}">
-                    <i class="align-middle" data-feather="book"></i>
+                    <i class="align-middle" data-feather="calendar"></i>
                     <span class="align-middle">Disponibilidad</span>
                 </a>
             </li>
 
             <li class="sidebar-item {% if request.path == '/admin/citas/' %} active {% endif %}">
                 <a class="sidebar-link" href="{% url 'citas' %}">
-                    <i class="align-middle" data-feather="book"></i>
+                    <i class="align-middle" data-feather="calendar"></i>
                     <span class="align-middle">Citas</span>
                 </a>
             </li>

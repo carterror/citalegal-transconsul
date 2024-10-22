@@ -1,0 +1,82 @@
+{% extends "./../base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Inicio
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-3">
+			<div class="col-md-7 heading-section text-center ftco-animate">
+				<span class="subheading">{{post.publicado  | date:"l, j \d\e F  \d\e Y" }}</span>
+			  <h2>{{post.titulo | title}}</h2>
+			</div>
+		  </div>
+	  <div class="row">
+		<div class="col-lg-8 ftco-animate">
+		  <p>
+			<img src="{% if post.foto %}/media/{{ post.foto }}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %}" alt="" class="img-fluid">
+		  </p>
+		  <div id="salvafo">
+			{{ post.cuerpo|safe }}
+		  </div>
+		  
+		  <div class="about-author d-flex p-4 bg-light">
+			<div class="bio mr-5">
+			  <img src="{% if post.autor.avatar %}/media/{{post.autor.avatar}}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %}" width="100px"  alt="FOto de perfil" class="img-fluid mb-4">
+			</div>
+			<div class="desc">
+			  <h3>{{ post.autor.first_name }} {{ post.autor.last_name }}</h3>
+			  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p> -->
+			</div>
+		  </div>
+
+		</div> <!-- .col-md-8 -->
+		<div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
+
+		  <div class="sidebar-box ftco-animate">
+			<h3>Últimos artículos</h3>
+			{% for p in posts %}
+			<div class="block-21 mb-4 d-flex">
+			  <a class="blog-img mr-4" style="background-image: url({% if p.foto %}/media/{{ p.foto }}{% else %}{% static '/assets/img/icon_oficial.png' %}{% endif %});"></a>
+			  <div class="text">
+				<h3 class="heading"><a href="{% url 'showArt' p.slug %}#show">{{ p.titulo }}</a></h3>
+				<div class="meta">
+				  <div><a href="#"><span class="icon-calendar"></span> {{p.publicado  | date:"d/M/Y" }}</a></div>
+				  <div><a href="#"><span class="icon-person"></span> {{ p.autor.first_name }} {{ p.autor.last_name }}</a></div>
+				</div>
+			  </div>
+			</div>
+			{% endfor %}
+		  </div>
+
+		</div>
+
+	  </div>
+	</div>
+  </section> <!-- .section -->
+  
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+    var descripcion = document.querySelector('#salvafo')
+
+    descripcion.innerHTML = `{{post.cuerpo | safe}}`
+    const imgs = descripcion.getElementsByTagName('img')
+    for (const img of imgs) {
+      img.classList.add('img-fluid')
+    }
+
+</script>
+{% endblock extra_scripts %}

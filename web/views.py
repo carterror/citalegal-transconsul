@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from .models import Testimonio, Trabajador
 from usuarios.models import Usuario
-from citas.models import Tramite
+from citas.models import Tramite, Cita, Disponible
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from configs.middleware import login_required, staff_member_required
 from django.urls import reverse_lazy
 from blog.models import Post
 from django.http import JsonResponse
+from django.db.models import Sum
+from django.db.models import Q
 import json
+from datetime import date
+today = date.today()
 
 def home(request):
     context = {
@@ -58,9 +62,12 @@ def reservar(request):
 @staff_member_required
 def dashboard(request):
     context = {
-        "trabajadores" : Trabajador.objects.all(),
+        "count_user" : Usuario.objects.count(),
+        "count_citas_c" : Cita.objects.filter(estado='success').count(),
+        "count_citas_p" : Cita.objects.filter(Q(estado='accept') | Q(estado='pending')).count(),
+        "disponi": Disponible.objects.filter(fecha__contains=today).aggregate(disponi=Sum('disponible')-Sum('reservas'))
     }
-    return render(request, 'madmin/blank.html', context)
+    return render(request, 'madmin/dash.html', context)
 
 @login_required
 @staff_member_required
@@ -200,3 +207,37 @@ def deleteAllTestimonios(request):
         messages.success(request, 'Eliminado con éxito.')
         
         return redirect(reverse_lazy('testimonio'))
+    
+
+@login_required
+@staff_member_required
+def usuario(request):
+    context = {
+        'usuarios': Usuario.objects.all()
+    }
+
+    return render(request, 'madmin/usuario/index.html', context)
+
+@login_required
+@staff_member_required
+def updateUsuario(request, pk, type):
+    usuario = get_object_or_404(Usuario, pk=pk)  
+
+    if type == 'deactive':
+        usuario.is_active = not usuario.is_active
+    if type == 'staff':
+        usuario.is_staff = not usuario.is_staff
+    
+    usuario.save()
+
+    messages.success(request, 'Guardado con éxito')
+    return redirect(reverse_lazy('usuario'))
+
+def showArt(request, slug):
+    post = get_object_or_404(Post, slug=slug)  
+    posts = Post.objects.exclude(id=post.id).all().order_by('-id')[:5]
+    context = {
+        "post" : post,
+        "posts" : posts
+    }
+    return render(request, 'web/pages/article.html', context)

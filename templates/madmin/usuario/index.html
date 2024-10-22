@@ -1,0 +1,89 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+Usuarios
+{% endblock title %}
+
+{% block extra_head %}
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+
+</style>
+{% endblock extra_head %}
+
+{% block extra_content %}
+
+<div class="container-fluid p-0">
+
+  <h1 class="h3 mb-3">Usuarios</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="row card-header justify-between">
+          <div class="col-6 align-self-center">
+            <h5 class="card-title mb-0">Listado de usuarios</h5>
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="mdatatable" class="display">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Trabajador</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in usuarios %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.first_name}} {{ last_name }}</td>
+                    <td>{{user.descripcion}}</td>
+                    <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-bs-placement="top" title="Ver">
+                            <i class="bi bi-eye"></i>
+                            <span class="visually-hidden">Staff</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-{% if user.is_staff == True %}danger{% else %}primary{% endif %}" data-address="{% url 'updateUsuario' pk=user.id type='staff' %}" onclick="deleteAlert(this)"  data-toggle="tooltip" data-bs-placement="top" title="{% if user.is_staff == True %}Degradar{% else %}Ascender{% endif %}">
+                            {% if user.is_staff == True %}
+                            <i class="bi bi-person-down"></i>
+                            {% else %}
+                            <i class="bi bi-person-up"></i>
+                            {% endif %}
+                            <span class="visually-hidden">Staff</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-{% if user.is_active == True %}danger{% else %}success{% endif %}" data-address="{% url 'updateUsuario' pk=user.id type='deactive' %}" onclick="deleteAlert(this)" data-toggle="tooltip" data-bs-placement="top" title="{% if user.is_active == True %}Desactivar{% else %}Activar{% endif %}">
+                            {% if user.is_active == True %}
+                              <i class="bi bi-x-octagon"></i>
+                            {% else %}
+                            <i class="bi bi-patch-check"></i>
+                            {% endif %}
+                            <span class="visually-hidden">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock extra_content %}
+
+{% block extra_scripts %}
+<script>
+</script>
+{% endblock extra_scripts %}

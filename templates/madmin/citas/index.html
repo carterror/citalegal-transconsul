@@ -44,17 +44,17 @@ Citas
                 <tr>
                   <td>{{cita.id }}</td>
 
-                    <td>{{cita.fecha.fecha | date:"d / m / Y"}}</td>
+                    <td>{{cita.fecha.fecha | date:"d/m/Y"}}</td>
                     <td>({{cita.cliente.username}}) {{cita.cliente.first_name}} {{cita.cliente.last_name}}</td>
                     <td class="px-2 text-center" >
                       {% if cita.estado == 'pending' %}
-                        <span class="badge bg-warning w-50 p-2">Pendiente</span>
+                        <span class="badge bg-warning">Pendiente</span>
                       {% elif cita.estado == 'cancel' %}
-                        <span class="badge bg-danger w-50 p-2">Cancelado</span>
+                        <span class="badge bg-danger">Cancelado</span>
                       {% elif cita.estado == 'success' %}
-                        <span class="badge bg-success w-50 p-2">Completado</span>
+                        <span class="badge bg-success">Completado</span>
                       {% elif cita.estado == 'accept' %}
-                        <span class="badge bg-primary w-50 p-2">Aceptado</span>
+                        <span class="badge bg-primary">Aceptado</span>
                       {% endif %}
                     </td>
                     <td class="text-end" >

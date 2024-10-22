@@ -81,11 +81,11 @@ function deleteAlert(ev) {
     const address = ev.getAttribute('data-address')
 
     swalWithBootstrapButtons.fire({
-        title: "¿Esta seguro?",
+        title: "¿Está seguro?",
         text: "No podrá revertir esta acción",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
+        confirmButtonText: "Aceptar",
         cancelButtonText: "Cancelar",
         reverseButtons: true
         }).then((result) => {
