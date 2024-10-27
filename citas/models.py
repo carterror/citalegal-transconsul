@@ -61,3 +61,11 @@ class Cita(models.Model):
     
     def __str__(self) -> str:
         return str(self.created_at)
+    
+    @property
+    def get_client(self):
+        return [self.cliente.username, self.cliente.first_name + ' ' + self.cliente.last_name]
+
+    @property
+    def get_date(self):
+        return self.fecha.fecha

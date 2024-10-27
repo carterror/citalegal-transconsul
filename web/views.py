@@ -10,6 +10,7 @@ from blog.models import Post
 from django.http import JsonResponse
 from django.db.models import Sum
 from django.db.models import Q
+from datetime import datetime
 import json
 from datetime import date
 today = date.today()
@@ -61,11 +62,28 @@ def reservar(request):
 @login_required
 @staff_member_required
 def dashboard(request):
+
+    # Consulta y mapeo de campos
+    citas_dict = Cita.objects.all()
+    
+    # Cambiar la clave 'descripcion' a 'title'
+    citas_actualizadas = [
+        {"title": cita.get_client[0], "client": cita.get_client[1], "status": cita.estado, "start":  cita.get_date.strftime("%Y-%m-%d"), "backgroundColor": "green" if cita.estado == "success" else ("orange" if cita.estado == "accept" else "red"), "borderColor": "green" if cita.estado == "success" else ("orange" if cita.estado == "accept" else "red") } for cita in citas_dict
+    ]
+
+    print(citas_actualizadas)
     context = {
         "count_user" : Usuario.objects.count(),
         "count_citas_c" : Cita.objects.filter(estado='success').count(),
         "count_citas_p" : Cita.objects.filter(Q(estado='accept') | Q(estado='pending')).count(),
-        "disponi": Disponible.objects.filter(fecha__contains=today).aggregate(disponi=Sum('disponible')-Sum('reservas'))
+        "disponi": Disponible.objects.filter(fecha__contains=today).aggregate(disponi=Sum('disponible')-Sum('reservas')),
+        "calendar": json.dumps(citas_actualizadas),
+        "citas_estados": [
+            Cita.objects.filter(estado='success').count(),
+            Cita.objects.filter(estado='pending').count(),
+            Cita.objects.filter(estado='cancel').count(),
+            Cita.objects.filter(estado='accept').count()
+        ]
     }
     return render(request, 'madmin/dash.html', context)
 
