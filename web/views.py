@@ -16,11 +16,13 @@ from datetime import date
 today = date.today()
 
 def home(request):
+    trabajadores = Trabajador.objects.all()
     context = {
         "testimonios" : Testimonio.objects.all(),
-        "trabajadores" : Trabajador.objects.all(),
+        "trabajadores" : trabajadores,
         "tramites": Tramite.objects.all(),
         "posts": Post.objects.all(),
+        "size_trabajadores": trabajadores.count()
     }
     return render(request, 'web/pages/home.html', context)
  
