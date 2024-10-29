@@ -18,4 +18,4 @@ class Usuario(AbstractUser):
 class Notificaciones(models.Model):
     user = models.ForeignKey(Usuario, null=True, on_delete=models.CASCADE)
     leido = models.BooleanField(default=False, null=False)
-    mensaje = models.CharField(null=False, max_length=100)
+    # mensaje = models.CharField(null=False, max_length=100)

@@ -1,4 +1,4 @@
-name: Django CI-CD
+name: Django Test
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version: [3.11]
+        python-version: [3.10, 3.11]
 
     steps:
     - uses: actions/checkout@v3
@@ -28,31 +28,3 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-
-  deploy-dev:
-
-    needs: [ build ]
-    if: github.ref == 'refs/heads/main'
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Copy project to the hosting
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: ""
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-
-      - name: Build Docker Container
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          script: cd ${{ secrets.REMOTE_TARGET }} && docker-compose up -d --build
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}

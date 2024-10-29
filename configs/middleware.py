@@ -6,7 +6,6 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
 
-
 def login_required(view_func):
 
     @wraps(view_func)

@@ -2,7 +2,6 @@ from django.db import models
 from usuarios.models import Usuario
 import json
 
-# Create your models here.
 class Trabajador(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     nivel = models.CharField(max_length=50, null=False)
