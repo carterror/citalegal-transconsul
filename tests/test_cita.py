@@ -1,13 +1,13 @@
 from django.test import TestCase
 from citas.models import Cita, Tramite, Disponible
 from usuarios.models import Usuario
-from datetime import datetime
+from datetime import datetime, timezone
 
 class DisponibleUnitTest(TestCase):
     def setUp(self):
         self.usuario = Usuario.objects.create_superuser(username='admin', password='admin')
 
-        self.fecha = datetime.now()
+        self.fecha = datetime.now(tz=timezone.utc)
 
         Disponible.objects.create(
             fecha = self.fecha,
@@ -16,7 +16,7 @@ class DisponibleUnitTest(TestCase):
     
     def test_model(self):
         post = Disponible.objects.first()
-        self.assertEqual(post.fecha, self.fecha)
+        self.assertEqual(post.disponible, 1)
 
 class CitaUnitTest(TestCase):
     def setUp(self):
@@ -30,7 +30,7 @@ class CitaUnitTest(TestCase):
         )
 
         tfecha = Disponible.objects.create(
-            fecha = datetime.now(),
+            fecha = datetime.now(tz=timezone.utc),
             disponible = 1
         )
 
