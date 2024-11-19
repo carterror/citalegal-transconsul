@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-# Create your models here.
 
 class Usuario(AbstractUser):
     ci = models.CharField('Carnet de identidad', max_length=11, null=True)
@@ -13,7 +12,6 @@ class Usuario(AbstractUser):
         
     def __str__(self) -> str:
         return self.username
-    
 
 class Notificaciones(models.Model):
     user = models.ForeignKey(Usuario, null=True, on_delete=models.CASCADE)
